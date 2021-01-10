@@ -1,0 +1,17 @@
+.title-i{
+    display: flex;
+    justify-content: space-between;
+}
+.title-i i{
+    color: #d1d1d1;
+}
+@media only screen and (max-width: 700px){
+    .book-img img{
+        height: 120px;
+        width: 100px;
+    }
+    .left-details,
+    .right-details{
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,41 @@
+.mt{
+    margin-top: 30px;
+}
+
+.btn-grn{
+    background: #28a745;
+    width: 85px;
+}
+.btn-red{
+    background: #ff3636;
+    width: 85px;
+}
+.btn-gra{
+    background: #cccccc;
+    width: 85px;
+}
+.btn{
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    font-family: "Open Sans";
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    margin-left:10px ;
+}
+.pur-text{
+    color: #6255a5;
+}
+.serach-button{
+    margin-top:25px ;
+}
+
+@media only screen and (max-width: 1000px){
+    table{
+        margin-top:25px ;
+    }
+}

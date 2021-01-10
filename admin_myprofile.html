@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
+    <link href="css/admin_myprofile.css" rel="stylesheet">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>My Profile</title>
+</head>
+
+<body>
+    <section id="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="admin_dashboard.html">Dashboard </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">Notes</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="admin_noteUnderReview.html">Notes Under Review</a>
+                                <a class="dropdown-item" href="admin_publishNote.html">Published Notes</a>
+                                <a class="dropdown-item " href="admin_downloadNote.html">Downloaded Notes</a>
+                                <a class="dropdown-item " href="admin_rejectNote.html">Rejected Notes</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Members</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Setting</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"><img src="images/person_1.jpg" alt="profile pic"
+                                    class="img-fluid rounded-circle"></button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Update Profile</a>
+                                <a class="dropdown-item" href="#">Change Password</a>
+                                <a class="dropdown-item dropdown-logout" href="#">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link nav-login text-center" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+    </section>
+
+    <section id="profile-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title">My Profile</h3>
+                    <form>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="fname">First Name*</label>
+                                <input type="text" class="form-control" id="fname" placeholder="Enter your First name"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="lname">Last Name*</label>
+                                <input type="text" class="form-control" id="lname" placeholder="Enter your Last name"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="email">Email*</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your Email"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="semail">Secondry Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your Email">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="phno">Phone Number</label>
+                                <div class="form-row">
+                                    <div class="col-md-2">
+                                        <select id="zip" class="form-control">
+                                            <option selected>+91</option>
+                                            <option>...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="phno"
+                                            placeholder="Enter The Phone Number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="pp">Profile Picture</label>
+
+                                <div class="drop-zone">
+                                    <span class="drop-zone__prompt"><img src="fonts/upload.png" alt="upload"
+                                            class="img-fluid"><br>Upload a picture</span>
+                                    <input type="file" id="pp" name="myFile" class="drop-zone__input">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <button class="btn btn-submit" type="submit">SUBMIT</button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <footer>
+        <hr>
+       
+        <div class="footer-flex">
+            <div class="text-left">
+                <p>version : 1.1.24</p>
+              
+            </div>
+            <div class="  text-right footer-icon">
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
+    <link href="css/admin_noteUnderReview.css" rel="stylesheet">
+    <link href="css/admin_manageAdmin.css" rel="stylesheet">
+    <link href="css/review.css" rel="stylesheet">
+    <link href="css/img.css" rel="stylesheet">
+    <link href="css/admin_publishNote.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <title>Publish Notes</title>
+</head>
+
+<body>
+    <section id="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="admin_dashboard.html">Dashboard </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">Notes</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="admin_noteUnderReview.html">Notes Under Review</a>
+                                <a class="dropdown-item" href="admin_publishNote.html">Published Notes</a>
+                                <a class="dropdown-item " href="admin_downloadNote.html">Downloaded Notes</a>
+                                <a class="dropdown-item " href="admin_rejectNote.html">Rejected Notes</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Members</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Setting</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"><img src="images/person_1.jpg" alt="profile pic"
+                                    class="img-fluid rounded-circle"></button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Update Profile</a>
+                                <a class="dropdown-item" href="#">Change Password</a>
+                                <a class="dropdown-item dropdown-logout" href="#">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link nav-login text-center" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+    </section>
+
+    <section id="manage-admin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title">Publish Notes</h3>
+
+                </div>
+
+                <div class="col-md-6 text-left">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="drop">Seller</label>
+                                <select id="drop" class="form-control">
+                                    <option selected>Khyati</option>
+                                    <option>.</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="col-md-6 text-right">
+                        <form class="serach-button">
+                                <div class="input-group md-form form-sm form-1 pl-0">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text purple lighten-3" id="basic-text1">
+                                             
+                                              <img src="fonts/search-icon.png" alt="serach"  aria-hidden="true"></span>
+                                        </div>
+                                        <input class="form-control my-0 py-1 custom-input" type="text" placeholder="Search" aria-label="Search">
+                                        <button class="btn custom-btn btn-sec">SEARCH</button> 
+                                       
+                                      </div>   
+    
+    
+                        </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="admin-table">
+            <div class="container">
+                <div class="row table-row-scroll">
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">SR. NO.</th>
+                                    <th scope="col">NOTE TITLE</th>
+                                    <th scope="col">CATEGORY</th>
+                                    <th scope="col">SELL TYPE</th>
+                                    <th scope="col">PRICE</th>
+                                    <th scope="col">SELLER</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">PUBLISHED DATE</th>
+                                    <th scope="col">APPROVE BY</th>
+                                    <th scope="col" class="text-center">NUMBER OF<br>DOWNLOAD</th>
+                                    <th scope="col"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td class="pur-text">Software Engineer</td>
+                                    <td>IT</td>
+                                    <td>Paid</td>
+                                    <td>$145</td>
+                                    <td>Rahul Shah </td>
+                                    <td><img src="fonts/eye.png" alt="eye" class="img-eye"></td>
+
+
+                                    <td>09-10-2020,10:10</td>
+                                    <td>Raj Sheth</td>
+                                    <td class="text-center">75</td>
+                                    <td>
+                                            <div class="dropdown_1">
+                                                    <button class="dropbtn_1"><img src="fonts/dots.png" alt="dot"></button>
+                                                    <div class="dropdown-content_1">
+                                                            <a href="admin_downloadNote.html">Download Note</a>
+                                                            <a href="#">View More</a>
+                                                            <a href="#">Unpublish</a>
+                                                       
+                                                       
+                                                    </div>
+                                                  </div>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td class="pur-text">Computer Basic</td>
+                                    <td>Computer</td>
+                                    <td>Free</td>
+                                    <td>$0</td>
+                                    <td>Rahul Sheth </td>
+                                    <td><img src="fonts/eye.png" alt="eye" class="img-eye"></td>
+
+
+                                    <td>09-10-2020,10:10</td>
+                                    <td>Khyati Patel</td>
+                                    <td class="text-center">50</td>
+                                   
+                                    <td>
+                                            <div class="dropdown_1">
+                                                    <button class="dropbtn_1"><img src="fonts/dots.png" alt="dot"></button>
+                                                    <div class="dropdown-content_1">
+                                                            <a href="admin_downloadNote.html">Download Note</a>
+                                                            <a href="#">View More</a>
+                                                            <a href="#">Unpublish</a>
+                                                       
+                                                       
+                                                    </div>
+                                                  </div>
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td class="pur-text">Human Boady</td>
+                                    <td>Science</td>
+                                    <td>Paid</td>
+                                    <td>$204</td>
+                                    <td>Rahul Sheth </td>
+                                    <td><img src="fonts/eye.png" alt="eye" class="img-eye"></td>
+
+
+                                    <td>09-10-2020,10:10</td>
+                                    <td>Raj Sheth</td>
+                                    <td class="text-center">45</td>
+                                   
+                                    <td>
+                                            <div class="dropdown_1">
+                                                    <button class="dropbtn_1"><img src="fonts/dots.png" alt="dot"></button>
+                                                    <div class="dropdown-content_1">
+                                                            <a href="admin_downloadNote.html">Download Note</a>
+                                                            <a href="#">View More</a>
+                                                            <a href="#">Unpublish</a>
+                                                       
+                                                       
+                                                    </div>
+                                                  </div>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td class="pur-text">world war 2</td>
+                                    <td>History</td>
+                                    <td>Paid</td>
+                                    <td>$58</td>
+                                    <td>Rahul Sheth </td>
+                                    <td><img src="fonts/eye.png" alt="eye" class="img-eye"></td>
+
+
+                                    <td>09-10-2020,10:10</td>
+                                    <td>Raj Sheth</td>
+                                    <td class="text-center">25</td>
+                                    <td>
+                                            <div class="dropdown_1">
+                                                    <button class="dropbtn_1"><img src="fonts/dots.png" alt="dot"></button>
+                                                    <div class="dropdown-content_1">
+                                                            <a href="admin_downloadNote.html">Download Note</a>
+                                                            <a href="#">View More</a>
+                                                            <a href="#">Unpublish</a>
+                                                       
+                                                       
+                                                    </div>
+                                                  </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td class="pur-text">Accounting</td>
+                                    <td>Account</td>
+                                    <td>Free</td>
+                                    <td>$0</td>
+                                    <td>Khyati Patel </td>
+                                    <td><img src="fonts/eye.png" alt="eye" class="img-eye"></td>
+
+
+                                    <td>09-10-2020,10:10</td>
+                                    <td >Raj Sheth</td>
+                                   <td class="text-center">8</td>
+                                    <td>
+                                            <div class="dropdown_1">
+                                                    <button class="dropbtn_1"><img src="fonts/dots.png" alt="dot"></button>
+                                                    <div class="dropdown-content_1">
+                                                            <a href="admin_downloadNote.html">Download Note</a>
+                                                            <a href="#">View More</a>
+                                                            <a href="#">Unpublish</a>
+                                                       
+                                                       
+                                                    </div>
+                                                  </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="pagination">
+                            <a href="#">&laquo;</a>
+                            <a href="#" class="active rounded-circle">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+
+                            <a href="#">&raquo;</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <footer>
+            <hr>
+           
+            <div class="footer-flex">
+                <div class="text-left">
+                    <p>version : 1.1.24</p>
+                  
+                </div>
+                <div class="  text-right footer-icon">
+                    <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+                </div>
+    
+            </div>
+        </footer>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/90013f5e15.js" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

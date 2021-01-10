@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+            <link href="css/user_profile.css" rel="stylesheet">
+            <link href="css/header.css" rel="stylesheet">
+            <link href="css/footer_logo.css" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>User Profile</title>
+    </head>
+    <body>
+
+      <section id="header">
+          <div class="img-container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+                        <a class="navbar-brand text-center" href="#"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                          <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="#">Search Notes </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">Sell Your Notes</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="#">Buyer Request</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">Contact Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"><img src="images/person_1.jpg" alt="profile pic"
+                                            class="img-fluid rounded-circle"></button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Update Profile</a>
+                                        <a class="dropdown-item" href="#">Change Password</a>
+                                        <a class="dropdown-item dropdown-logout" href="#">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link nav-login text-center" href="login.html">Login</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="user-heading text-center">
+                                        <h3>User Profile</h3>
+                                  </div>
+                                 
+
+                              </div>
+
+                          </div>
+
+                      </div>
+
+          </div>
+
+      </section>
+
+      <section id="user_form">
+          <div class="container">
+              
+                  <form>
+                   <div class="form-row">
+                       <div class="form-group col-md-12">
+                            <h3>Basic Profile Details</h3>
+                       </div>
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="firstname">First Name*</label>
+                                    <input type="text" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Enter First Name" required>
+                                       
+                                
+                          </div>
+                          <div class="form-group col-md-6">
+                                
+                                    <label for="lastname">Last Name*</label>
+                                    <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp" placeholder="Enter Last Name" required>
+                                           
+                                
+                          </div>
+
+                   </div>  
+                   
+                   <div class="form-row">
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="email">Email*</label>
+                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email" required>
+                                       
+                               
+                          </div>
+                          <div class="form-group col-md-6">
+                                
+                                    <label for="dob">Date Of Birth</label>
+                                    <input type="date" class="form-control" id="dob" aria-describedby="emailHelp" placeholder="Enter Date Of Birth" required>
+                                           
+                                
+                          </div>
+
+                   </div>
+                   
+                   <div class="form-row">
+                        <div class="form-group col-md-6">
+                                
+                                <label for="gender">Gender</label>
+                                <select id="gender" class="form-control">
+                                  <option selected>Choose</option>
+                                  <option>Male</option>
+                                  <option>Female</option>
+                                  <option>Other</option>
+                                </select>
+                                       
+                                
+                          </div>
+                          <div class="form-group col-md-6">
+                                <label for="mobileno">Phone Number</label>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                            <select id="pin" class="form-control">
+                                            <option selected>+91</option>
+                                            <option>+1</option>
+                                            <option>+22</option>
+                                            <option>+121</option>
+                                          </select>
+                                    </div>
+
+                                    <div class="form-group col-md-9">
+                                           <input type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" placeholder="Enter Phone Number" >
+
+
+                                    </div>
+
+                                </div>
+                   
+                          </div>
+                          
+                          
+
+                          <div class="form-group col-md-6">
+                            <label for="pp">Profile Picture</label>
+
+                            <div class="drop-zone">
+                                <span class="drop-zone__prompt"><img src="fonts/upload.png" alt="upload"
+                                        class="img-fluid"><br>Upload a picture</span>
+                                <input type="file" id="pp" name="myFile" class="drop-zone__input">
+                            </div>
+
+                          </div>
+
+                   </div>
+
+                   <br>
+                          <br>
+                   <div class="form-row">
+                       <div class="form-group col-md-12">
+                           <h3>Address Details</h3>
+
+                       </div>
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="address1">Address Line 1*</label>
+                                    <input type="text" class="form-control" id="address2" aria-describedby="emailHelp" placeholder="Enter the Address Line 1" required>
+                                       
+                                
+                          </div>
+                          <div class="form-group col-md-6">
+                                
+                                    <label for="address2">Address Line 2</label>
+                                    <input type="text" class="form-control" id="address2" aria-describedby="emailHelp" placeholder="Enter The Address Line 2">
+                                           
+                                
+                          </div>
+
+                   </div>  
+                   
+                   <div class="form-row">
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="city">City*</label>
+                                    <input type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="Enter The City" required>
+                                       
+                               
+                          </div>
+                          <div class="form-group col-md-6">
+                                
+                                    <label for="state">State</label>
+                                    <input type="text" class="form-control" id="state" aria-describedby="emailHelp" placeholder="Enter The State" required>
+                                           
+                                
+                          </div>
+
+                   </div>
+
+                   <div class="form-row">
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="zip">Zip*</label>
+                                    <input type="text" class="form-control" id="zip" aria-describedby="emailHelp" placeholder="Enter The Zip" required>
+                                       
+                               
+                          </div>
+                          <div class="form-group col-md-6">
+                                
+                                    <label for="country">Country*</label>
+                                    <select id="country" class="form-control">
+                                            <option selected>..</option>
+                                            <option>.</option>
+                                            <option>..</option>
+                                            <option>..</option>
+                                    </select>
+                                
+                          </div>
+
+                   </div>
+                   <br>
+                   <br>
+
+                   <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>University And College Information</h3>
+ 
+                        </div>
+                         <div class="form-group col-md-6">
+                                 
+                                     <label for="uni">University*</label>
+                                     <input type="text" class="form-control" id="uni" aria-describedby="emailHelp" placeholder="Enter the University" required>
+                                        
+                                 
+                           </div>
+                           <div class="form-group col-md-6">
+                                 
+                                     <label for="collage">Collage*</label>
+                                     <input type="text" class="form-control" id="collage" aria-describedby="emailHelp" placeholder="Enter The Collage" required>
+                                            
+                                 
+                           </div>
+ 
+                    </div>  
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button class="btn form-btn">SUBMIT</button>
+
+                        </div>
+
+                    </div>
+         
+                  
+                </form>
+
+              </div>
+
+          </div>
+
+      </section>
+      <footer>
+          <hr>
+         
+              <div class="footer-flex">
+                  <div class="text-left">
+                      
+                     <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+                  </div>
+                  <div class="  text-right footer-icon">
+                         <a href="#" class="facebook"> <img src="fonts/facebook.png" alt="facebook" class="img-fluid"></a>
+                         <a href="#" class="twitter"> <img src="fonts/twitter.png" alt="twitter" class="img-fluid"></a>
+                         <a href="#" class="linkedin"> <img src="fonts/linkedin.png" alt="linkedin" class="img-fluid"></a>
+                  </div>
+  
+              </div>
+  
+         
+      </footer>
+  
+    
+
+  
+
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+    </body>
+</html>

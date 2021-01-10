@@ -1,0 +1,37 @@
+.popup-content{
+    background:whitesmoke;
+    width: auto; 
+    padding:30px ; 
+     
+}
+
+.popup-content h4{
+    font-family: "Open Sans";
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 30px;
+    color: #6255a5;
+}
+
+.title{
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    color: #333333;
+}
+
+.popup-content p{
+    font-family: "Open Sans";
+}
+
+button{
+    margin-top:30px ;
+    background: #6255a5 !important;
+    color: #ffffff !important;
+    font-family: "Open Sans";
+    width: 540px;
+    font-weight: 600;
+    line-height: 22px;
+    font-size: 18px;
+}

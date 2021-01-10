@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+            <link href="css/addNote.css" rel="stylesheet">
+            <link href="css/header.css" rel="stylesheet">
+            <link href="css/footer.css" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Add Notes</title>
+    </head>
+    <body>
+
+      <section id="header">
+          <div class="img-container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+                        <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                          <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="Search.html">Search Notes </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">Sell Your Notes</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="buyer_request.html">Buyer Request</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="faq.html">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="contact.html">Contact Us</a>
+                            </li>
+                            <li class="nav-item">
+                                    <div class="dropdown">
+                                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false"><img src="images/person_1.jpg" alt="profile pic"
+                                                    class="img-fluid rounded-circle"></button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="user_profile.html">Update Profile</a>
+                                                <a class="dropdown-item" href="forgot_password.html">Change Password</a>
+                                                <a class="dropdown-item dropdown-logout" href="#">Logout</a>
+                                            </div>
+                                        </div>
+                               
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link nav-login text-center" href="login.html">Login</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="user-heading text-center">
+                                        <h3>Add Notes</h3>
+                                  </div>
+                                 
+
+                              </div>
+
+                          </div>
+
+                      </div>
+
+          </div>
+
+      </section>
+
+      <section id="user_form">
+          <div class="container">
+              
+                  <form>
+                   <div class="form-row">
+                       <div class="form-group col-md-12">
+                            <h3>Basic Notes Details</h3>
+                       </div>
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="title">Title*</label>
+                                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter The Title" required>
+                                       
+                                
+                          </div>
+                          <div class="form-group col-md-6">
+                                
+                                    <label for="category">Category*</label>
+                                    <input type="text" class="form-control" id="category" aria-describedby="emailHelp" placeholder="Enter The Category" required>
+                                           
+                                
+                          </div>
+
+                   </div>  
+                   
+                   <div class="form-row">
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="displaypic">Display Picture*</label>
+                                    <div class="drop-zone">
+                                            <span class="drop-zone__prompt"><img src="fonts/upload.png" alt="upload"
+                                                    class="img-fluid"><br>Upload a picture</span>
+                                            <input type="file" id="pp" name="myFile" class="drop-zone__input">
+                                        </div>
+                                       
+                               
+                          </div>
+                          <div class="form-group col-md-6">
+                                
+                                    <label for="upload">Upload Notes*</label>
+                                    <div class="drop-zone">
+                                            <span class="drop-zone__prompt"><img src="fonts/upload-note.png" alt="upload"
+                                                    class="img-fluid"><br>Upload your note</span>
+                                            <input type="file" id="pp" name="myFile" class="drop-zone__input">
+                                        </div>
+                                    
+                                           
+                                
+                          </div>
+
+                   </div>
+                   
+                   <div class="form-row">
+                        <div class="form-group col-md-6">
+                                
+                                <label for="type">Type</label>
+                                <select id="type" class="form-control">
+                                        <option selected>select type</option>
+                                        <option>.</option>
+                                        <option>..</option>
+                                        <option>..</option>
+                                </select>
+                                   
+                            
+                      </div>
+                      <div class="form-group col-md-6">
+                            
+                                <label for="lastname">Number Of Pages</label>
+                                <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp" placeholder="Enter Number of page" >
+                                       
+                            
+                      </div>
+       
+                          <div class="form-group col-md-6">
+                                <label for="desc">Description*</label>
+                                <textarea class="form-control" id="desc" rows="5" required></textarea>
+
+                          </div>
+
+                   </div>
+                   
+
+                   <br>
+                          <br>
+
+                          <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h3>Institution Information</h3>
+         
+                                </div>
+                                 <div class="form-group col-md-6">
+                                        <label for="country">Country*</label>
+                                        <select id="country" class="form-control">
+                                                <option selected>..</option>
+                                                <option>.</option>
+                                                <option>..</option>
+                                                <option>..</option>
+                                        </select>
+                                             
+                                                
+                                         
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                         
+                                             <label for="collage">Institution Name *</label>
+                                             <input type="text" class="form-control" id="collage" aria-describedby="emailHelp" placeholder="Enter The Collage" required>
+                                                    
+                                         
+                                   </div>
+         
+                            </div>  
+
+
+
+
+                            <br><br>
+
+
+                   <div class="form-row">
+                       <div class="form-group col-md-12">
+                           <h3>Course Details </h3>
+
+                       </div>
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="course_name">Course Name</label>
+                                    <input type="text" class="form-control" id="course_name" aria-describedby="emailHelp" placeholder="Enter the course name" required>
+                                       
+                                
+                          </div>
+                          <div class="form-group col-md-6">
+                                
+                                    <label for="course_code">Course Code</label>
+                                    <input type="text" class="form-control" id="course_code" aria-describedby="emailHelp" placeholder="Enter The course code">
+                                           
+                                
+                          </div>
+
+                   </div>  
+                   
+                   <div class="form-row">
+                        <div class="form-group col-md-6">
+                                
+                                    <label for="professor">Professor / Lecturer</label>
+                                    <input type="text" class="form-control" id="professor" aria-describedby="emailHelp" placeholder="Enter your professor name" >
+                                       
+                               
+                          </div>
+                          
+
+                   </div>
+
+                   
+                   <br>
+                   <br>
+                   <div class="form-row">
+                       <div class="form-group col-md-12">
+                           <h3>Selling Information</h3>
+                       </div>
+                   </div>
+                   
+                   <div class="form-row">
+                       
+                        <div class="form-group col-md-6">
+                                
+                                    <label >Sell For*</label><br>
+                                    <div class="flex"> 
+                                    <input type="radio" class="radio-form" id="free" name="sell_for" > <label for="free" class="radio-label" >Free</label>
+                                    <input type="radio" class="radio-form" id="paid" name="sell_for" > <label for="paid" class="radio-label">Paid</label>
+                                </div> <br>
+                                    <label for="sell_price">Sell Price*</label>
+                                    <input type="text" class="form-control" id="professor" aria-describedby="emailHelp" placeholder="Enter your professor name" >
+                                    
+
+                                       
+                               
+                          </div>
+                          <div class="form-group col-md-6">
+                                <label for="pre">Note Preview*</label>
+                                <div class="drop-zone">
+                                        <span class="drop-zone__prompt"><img src="fonts/upload.png" alt="upload"
+                                                class="img-fluid"><br>Upload a picture</span>
+                                        <input type="file" id="pp" name="myFile" class="drop-zone__input">
+                                    </div>
+
+                          </div>
+                        
+                          
+
+                   </div>
+               
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button class="btn form-btn">SAVE</button>
+                            <button class="btn form-btn">PUBLISH</button>
+
+                        </div>
+
+                    </div>
+         
+                  
+                </form>
+
+              </div>
+
+          </div>
+
+      </section>
+
+      <footer>
+            <hr>
+           
+                <div class="footer-flex">
+                    <div class="text-left">
+                        
+                       <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+                    </div>
+                    <div class="  text-right footer-icon">
+                           <a href="#" class="facebook"> <img src="fonts/facebook.png" alt="facebook" class="img-fluid"></a>
+                           <a href="#" class="twitter"> <img src="fonts/twitter.png" alt="twitter" class="img-fluid"></a>
+                           <a href="#" class="linkedin"> <img src="fonts/linkedin.png" alt="linkedin" class="img-fluid"></a>
+                    </div>
+    
+                </div>
+    
+           
+        </footer>
+    
+
+  
+
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/90013f5e15.js" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+
+    </body>
+</html>

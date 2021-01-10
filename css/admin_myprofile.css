@@ -1,0 +1,92 @@
+.dropdown-toggle::after { 
+    content: none; 
+} 
+
+button:focus{ 
+    box-shadow: none !important;
+}
+
+#profile-form{
+    margin-top:160px ;
+}
+
+label{
+    margin-top:10px ;
+}
+.title{
+    font-family: "Open Sans";
+    font-size: 34px;
+    font-weight: 600;
+    color: #6255a5;
+    margin-bottom: 10px;
+}
+
+.btn-submit{
+    background: #6255a5;
+    height: auto;
+    border-radius: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -ms-border-radius:3px;
+    -o-border-radius:3px;
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    margin: 20px 0;
+}
+/* ***************************************************
+**************upload img***************************
+*************************************************** */
+
+.drop-zone {
+   padding: 25px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   font-family: "Quicksand", sans-serif;
+   font-weight: 500;
+   font-size: 20px;
+   cursor: pointer;
+   color: #cccccc;
+   border: 1px solid #d1d1d1;
+   border-radius:3px ;
+   -webkit-border-radius:3px ;
+   -moz-border-radius:3px ;
+   -ms-border-radius:3px ;
+   -o-border-radius:3px ;
+}
+  
+  .drop-zone--over {
+    border-style: solid;
+  }
+  
+  .drop-zone__input {
+    display: none;
+  }
+  
+  .drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #cccccc;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+  }
+  

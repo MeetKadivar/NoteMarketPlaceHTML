@@ -1,0 +1,82 @@
+body{
+    background: url("../images/banner-with-overlay-login.jpg") ;
+    background-position:center ;
+
+    
+}
+.form-box{
+    background: white;
+    padding: 10px;
+    border: 1px solid #d1d1d1;
+    border-radius:3px ;
+    -webkit-border-radius:3px ;
+    -moz-border-radius:3px ;
+    -ms-border-radius:3px ;
+    -o-border-radius:3px ;
+}
+
+.password-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.main{
+    margin-top: 100px;
+}
+.form-div{
+    margin-left:470px ;
+    margin-top: 20px;
+    width: 650px;
+}
+.btn-custom{
+    width: 480px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    color: #ffffff;
+    background: #6255a5;
+    font-style: "Open Sans";
+    font-size: 18px;
+}
+.btn-custom:hover{
+    color: #ffffff;
+}
+.eye-img{
+  
+    margin-top:-60px ;
+    margin-left:500px ;
+      cursor: pointer;
+}
+.title{
+    font-family: "Open Sans";
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+}
+.content-p{
+    font-family: "Open Sans";
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #333333;
+
+}
+.link{
+    color: #6255a5;
+}
+@media only screen and (max-width: 700px) {
+    .form-div{
+        margin-left:0px ;
+    }
+    body{
+        background: repeat;
+       
+        background: url("../images/banner-with-overlay-login.jpg") ;
+    }
+    .img-conatainer img{
+        margin-left: 170px;
+    }
+  }
+  
