@@ -1,0 +1,303 @@
+﻿
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+        
+        <link href="~/Content/main.css" rel="stylesheet" />
+        <link href="~/Content/footer_logo.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+        <title>Note Maketplace </title>
+    </head>
+
+    <body>
+
+
+        <!-- header -->
+        <section id="header">
+            <div class="home-img-container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+                    <a class="navbar-brand list-link " href="#"> <img src="~/Content/imges/top-logo.png" alt="logo" class="img-fluid" /></a>
+                   
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link list-link" href="#">Search Notes </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link list-link" href="#">Sell Your Notes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link list-link" href="#">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                            </li>
+                            <li class="nav-item ">
+                                @Html.ActionLink("LogIn", "Login", "Account", new { area = "" }, new { @class = "nav-link nav-login text-center" })
+
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+                </nav>
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-md-12 col-sm-6">
+                            <div class="home-content">
+                                <h3>Download Free/Paid Notes <br>or Sale your Books</h3>
+                                <p>Et adipisicing sint tempor tempor amet cupidatat <br> tempor amet cupidatat .</p>
+                                <button class="home-btn btn">Learn More</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+
+        <!-- about us -->
+        <section id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="about-heading">
+                            <h3>About<br>NotesMarketPlace</h3>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-7">
+                        <div class="about-content">
+                            <p>
+                                Esse eiusmod dolor ipsum irure dolor Lorem esse labore proident dolor. Non culpa consectetur
+                                velit sit officia occaecat voluptate sint adipisicing. Ex aliquip sint esse incididunt magna
+                                occaecat ex veniam aute culpa.
+                            </p>
+                            <br>
+                            <p>
+                                Dolor minim veniam eu velit exercitation aute laboris duis elit quis. Quis culpa quis sint ea
+                                cupidatat. Fugiat culpa eu deserunt consequat esse pariatur magna. Exercitation ipsum et do
+                                proident consectetur quis consectetur
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- working -->
+        <section id="work">
+            <div class="work-heading text-center">
+                <h3>How it Work</h3>
+            </div>
+            <div class="container">
+                <div class="row ">
+                    <div class="col-md-6 text-center work-1">
+                        <img src="~/Content/fonts/download.png" class="img-fluid rounded-circle" alt="download" />
+
+
+                        <h4>Download Free/Paid Notes</h4>
+                        <p>Get Material for your <br>Course etc.</p>
+
+                        <button class="white-nav-login btn work-btn">DOENLOAD</button>
+                    </div>
+                    <div class="col-md-6 text-center work-2">
+
+                        <img src="~/Content/fonts/seller.png" class="img-fluid rounded-circle" alt="download" />
+                        <h4>Seller</h4>
+                        <p>Upload and Download Course<br>and Material etc.</p>
+                        <button class="white-nav-login btn work-btn">SELL BOOKS</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- testimonial -->
+        <section id="testimonial">
+            <div class="text-center test-heading">
+                <h3>What Our Customers are Saying</h3>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="testimonial">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="~/Content/imges/person_1.jpg" alt="test1"
+                                             class="rounded-circle img-fluid test-img" />
+
+                                    </div>
+                                    <div class="col-md-9 test-des">
+                                        <h5>Walter Meller</h5>
+                                        <p>Founder & CEO</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <p class="test-para">
+                                "Amet non amet laborum ipsum. Elit elit duis veniam dolor incididunt id
+                                amet adipisicing. Culpa id sit non esse commodo id ipsum ipsum consequat ex aute. In esse
+                                ipsum "
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="testimonial">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="~/Content/imges/person_2.jpg" alt="test1"
+                                             class="rounded-circle img-fluid test-img" />
+
+                                    </div>
+                                    <div class="col-md-9 test-des">
+                                        <h5>Walter Meller</h5>
+                                        <p>Founder & CEO</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <p class="test-para">
+                                "Amet non amet laborum ipsum. Elit elit duis veniam dolor incididunt id
+                                amet adipisicing. Culpa id sit non esse commodo id ipsum ipsum consequat ex aute. In esse
+                                ipsum "
+                            </p>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="testimonial">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="~/Content/imges/person_3.jpg" alt="test1"
+                                             class="rounded-circle img-fluid test-img" />
+
+                                    </div>
+                                    <div class="col-md-9 test-des">
+                                        <h5>Walter Meller</h5>
+                                        <p>Founder & CEO</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <p class="test-para">
+                                "Amet non amet laborum ipsum. Elit elit duis veniam dolor incididunt id
+                                amet adipisicing. Culpa id sit non esse commodo id ipsum ipsum consequat ex aute. In esse
+                                ipsum "
+                            </p>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="testimonial">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="~/Content/imges/person_4.jpg" alt="test1"
+                                             class="rounded-circle img-fluid test-img" />
+
+                                    </div>
+                                    <div class="col-md-9 test-des">
+                                        <h5>Walter Meller</h5>
+                                        <p>Founder & CEO</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <p class="test-para">
+                                "Amet non amet laborum ipsum. Elit elit duis veniam dolor incididunt id
+                                amet adipisicing. Culpa id sit non esse commodo id ipsum ipsum consequat ex aute. In esse
+                                ipsum "
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- footer -->
+        <footer>
+            <hr>
+
+            <div class="footer-flex">
+                <div class="text-left">
+
+                    <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+                </div>
+                <div class="  text-right footer-icon">
+                    <a href="#" class="facebook"> <img src="~/Content/fonts/facebook.png" alt="facebook" class="img-fluid" /></a>
+
+                    <a href="#" class="twitter"> <img src="~/Content/fonts/twitter.png" alt="twitter" class="img-fluid" /></a>
+                    <a href="#" class="linkedin">  <img src="~/Content/fonts/linkedin.png" alt="linkedin" class="img-fluid" /></a>
+                </div>
+
+
+            </div>
+
+
+        </footer>
+
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Scripts/header.js"></script>
+        <script src="~/Scripts/main.js"></script>
+
+    </body>
+
+</html>

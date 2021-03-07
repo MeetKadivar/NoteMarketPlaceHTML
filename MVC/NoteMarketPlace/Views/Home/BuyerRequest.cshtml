@@ -1,0 +1,383 @@
+﻿@model IEnumerable<NoteMarketPlace.Download>
+
+
+@{
+    ViewBag.Title = "BuyerRequest";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="~/Content/header.css" rel="stylesheet" />
+
+    <link href="~/Content/footer_fixed.css" rel="stylesheet" />
+    <link href="~/Content/myDownload.css" rel="stylesheet" />
+
+    <link href="~/Content/buyer_request.css" rel="stylesheet" />
+
+    <link href="~/Content/review.css" rel="stylesheet">
+    <link href="~/Content/img.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>BuyerRequest</title>
+</head>
+<body>
+    <section id="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="#">
+
+                <img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Search Notes </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sell Your Notes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active-link" href="#">Buyer Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <img src="~/Content/imges/person_1.jpg" alt="profile pic"
+                                     class="img-fluid rounded-circle">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">My Profile</a>
+                                <a class="dropdown-item" href="#">My Downloads</a>
+                                <a class="dropdown-item" href="#">My Sold Notes</a>
+                                <a class="dropdown-item" href="#">My Rejected Notes</a>
+                                
+                                <a class="dropdown-item" href="#">Change Password</a>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                            }
+                        }
+
+                        
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+    </section>
+
+    <section id="download">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <h4 class="download-title">Buyer Request</h4>
+
+                </div>
+                <div class="col-md-6 text-right">
+                    <form method="post">
+                        @using (Html.BeginForm("BuyerRequest","Home",FormMethod.Post))
+                        {
+                        <div class="input-group md-form form-sm form-1 pl-0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text purple lighten-3" id="basic-text1">
+
+
+                                    <img src="~/Content/fonts/search-icon.png" alt="serach" aria-hidden="true" />
+                                </span>
+                            </div>
+                            @Html.TextBox("serachText", null,new { @class= "form-control my-0 py-1 custom-input", @placeholder = "Search" })
+                            @*<input class="form-control my-0 py-1 custom-input" type="text" placeholder="Search" aria-label="Search" >*@
+                            <button class="btn ser_btn" type="submit">SEARCH</button>
+                        </div>
+
+                        }
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row table-row-scroll">
+                <div class="col-md-12">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">SR. NO.</th>
+                                <th scope="col">
+                                  
+                                    @Html.ActionLink("NOTETITLE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "NoteTitle",PageNumber = ViewBag.PageNumber == 0 ?1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("CATAGORY", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+
+
+                                    
+                                </th>
+
+                                <th scope="col">
+                                    @Html.ActionLink("BUYER", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Buyer", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                    
+                                </th>
+
+                                <th scope="col">SELLTYPE</th>
+                                <th scope="col">
+                                    @Html.ActionLink("PRICE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price" , PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+
+                                    
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("DOWNLOADED\n DATE/TIME", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "DownDate" , PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+
+                                   
+                                </th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                           
+                            @{
+                                int i = 1;
+                                foreach (var item in Model)
+                                {
+
+
+                                    <tr>
+                                        <td>
+
+                                              @(i++)
+                                               
+
+
+
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NoteTitle)
+                                           
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NoteCategory)
+
+                                        </td>
+                                        <td>
+
+
+
+                                            @Html.DisplayFor(modelItem => item.User1.Email)
+
+
+
+
+                                        </td>
+                                        @if (item.IsPaid == true)
+                                            {
+                                            <td> Paid</td>
+                                        }
+                                        else
+                                        {
+                                            <td> Free </td>
+
+                                        }
+
+
+                                        @if (item.IsPaid == true)
+                                            {
+                                            <td>  @Html.DisplayFor(modelItem => item.PurchasedPrice)</td>
+                                        }
+                                        else
+                                        {
+                                            <td> Free </td>
+
+                                        }
+
+                                        @if (item.AttachmentDownloadedDate == null)
+                                            {
+                                            <td>Not Recorded</td>
+                                        }
+                                        else
+                                        {
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AttachmentDownloadedDate)
+                                            </td>
+
+                                        }
+                                        <td><img src="~/Content/fonts/eye.png" alt="eye" class="img-eye" /></td>
+
+                                        <td>
+
+                                            <div class="dropdown_1">
+                                                <button class="dropbtn_1">
+
+                                                    <img src="~/Content/fonts/dots.png" alt="dot" />
+                                                </button>
+                                                <div class="dropdown-content_1">
+
+                                                    <a href="#">Allow Download</a>
+
+
+
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+            </div>
+           
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="pagination">
+
+                        @{
+                            double totalPages = ViewBag.TotalPages;
+
+                            if (totalPages > 1)
+                            {
+                                if (ViewBag.PageNumber == 1)
+                                {
+                                    @Html.ActionLink("<<", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy, PageNumber = ViewBag.PageNumber })
+
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("<<", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 })
+
+                                }
+
+                                for (int j = 1; j <= totalPages; j++)
+                                {
+                                    if (j == ViewBag.PageNumber)
+                                    {
+                                        @Html.ActionLink(j.ToString(), "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy, PageNumber = j }, new { @class = "active rounded-circle" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink(j.ToString(), "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy, PageNumber = j })
+
+
+                                    }
+
+
+                                }
+                                if (ViewBag.PageNumber == totalPages)
+                                {
+                                    @Html.ActionLink(">>", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy, PageNumber = ViewBag.PageNumber })
+
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(">>", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 })
+
+                                }
+
+
+
+                            }
+                            else
+                            {
+
+                            }
+
+
+
+
+                        }
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+    <footer>
+        <hr>
+
+        <div class="footer-flex">
+            <div class="text-left">
+
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+            <div class="  text-right footer-icon">
+                <a href="#" class="facebook"> <img src="~/Content/fonts/facebook.png" alt="facebook" class="img-fluid" /></a>
+
+                <a href="#" class="twitter"> <img src="~/Content/fonts/twitter.png" alt="twitter" class="img-fluid" /></a>
+                <a href="#" class="linkedin">  <img src="~/Content/fonts/linkedin.png" alt="linkedin" class="img-fluid" /></a>
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+
+</body>
+</html>

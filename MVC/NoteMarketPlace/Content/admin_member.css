@@ -1,0 +1,161 @@
+#member{
+    margin-top: 150px;
+   
+}
+
+.pur-text{
+    color: #6255a5;
+}
+.box{
+    border-right: 1px solid #d1d1d1;
+}
+table{
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    padding: 15px;
+}
+
+table td i{
+    margin-left: 10px;
+    color: #d1d1d1;
+}
+td,th{
+    font-family: "Open Sans";
+}
+td{
+    font-size: 14px;
+}
+th{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    color: #333333;
+}
+.pagination {
+    display: inline-block;
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+
+  .active{
+      color: #ffffff !important;
+      background: #6255a5;
+     
+      font-family: "Open Sans";
+      font-weight: 400;
+      font-size: 14px;
+      
+  }
+
+  
+.three-dots:after {
+    cursor: pointer;
+    color: #d1d1d1;
+    content: '\2807';
+    font-size: 20px;
+    padding: 0 5px;
+  }
+  
+  .dropdown-1 a {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+   
+  }
+  
+ .dropdown-1 a div {
+    padding: 7px;
+  }
+  
+  .dropdown-1 {
+    position: absolute;
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #d1d1d1;
+    outline: none;
+    opacity: 0;
+    z-index: -1;
+    max-height: 0;
+
+}
+  
+  .dropdown-container:focus {
+    outline: none;
+  }
+  
+  .dropdown-container:focus .dropdown-1 {
+    opacity: 1;
+    z-index: 100;
+    max-height: 100vh;
+   
+}
+
+.dropdown-1 a:hover{
+   
+    outline: none;
+    color: #6255a5 !important;
+    text-decoration: none;
+}
+
+.title{
+    color: #6255a5;
+    font-size: 34px;
+    font-family: "Open Sans";
+    font-weight: 600;
+    margin-bottom:30px ;
+}
+.title-sm{
+    color: #6255a5;
+    font-size: 24px;
+    font-family: "Open Sans";
+    font-weight: 500;
+    margin: 30px 0;
+}
+.admin-table{
+    margin-top:-20px ;
+}
+.box-flex{
+    display: flex;
+    justify-content: space-between;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    padding-top:10px ;
+
+}
+@media only screen and (max-width: 700px) {
+    .box{
+        border: none;
+        border-bottom:1px solid #d1d1d1 ;
+        margin-bottom:5px ;
+    }
+    .admin-table .table-row-scroll{
+        overflow-y:scroll;
+    }
+    .member-img img{
+        height: 100px;
+        width: 100px;
+    }
+    .title{
+        font-size: 24px;
+    }
+    .box-flex{
+        font-size: 12px;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .box{
+        border-bottom:none ;
+        
+    }
+}

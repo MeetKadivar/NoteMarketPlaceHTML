@@ -1,0 +1,143 @@
+﻿@model NoteMarketPlace.User
+
+@{
+    ViewBag.Title = "Signup";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="~/Content/signup.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Signup</title>
+</head>
+<body>
+
+
+
+    <div class="main">
+        <div class="text-center img-conatainer">
+
+            <img src="~/Content/imges/top-logo.png" alt="logo" />
+        </div>
+
+        <div class="form-div">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-box" method="post">
+                          
+
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="from-row">
+                                    <div class="form-group col-md-12 text-center">
+                                        <h4 class="title">LogIn</h4>
+                                        <p class="content-p">Enter your email address and password to login</p>
+                                        @if (ViewBag.Status == true)
+                                        {
+                                            <p class="success-msg"><i class="fas fa-check-circle"></i> Your account has been successfully created </p>
+                                        }
+                                        else
+                                        {
+
+                                            <p>@ViewBag.Message</p>
+                                        }
+                                    </div>
+                                    <div class="form-group col-md-12 ">
+                                        @Html.LabelFor(model => model.FirstName)
+                                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your first name" } })
+
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger error" })
+
+
+                                    </div>
+                                    <div class="form-group col-md-12 ">
+                                        @Html.LabelFor(model => model.LastName)
+                                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the Last Name" } })
+
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger error" })
+
+
+                                    </div>
+                                    <div class="form-group col-md-12 ">
+                                        @Html.LabelFor(model => model.Email)
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "inputEmail4", placeholder = "Enter the Email" } })
+
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger error" })
+
+
+                                    </div>
+                                    <div class="form-group col-md-12 ">
+                                        <div class="password-flex">
+                                            @Html.LabelFor(model => model.Password)
+
+                                        </div>
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "inputpassword", placeholder = "Password" } })
+
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger error" })
+
+
+                                        <img src="~/Content/fonts/eye.png" alt="eye" class="img-fluid eye-img" id="togglePassword" />
+
+                                    </div>
+                                    <div class="form-group col-md-12 ">
+                                        <div class="password-flex">
+                                            @Html.LabelFor(model => model.ConfirmPassword)
+                                        </div>
+                                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", id = "inputpassword_2", placeholder = "Password" } })
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "error" })
+
+                                        <img src="~/Content/fonts/eye.png" alt="eye" class="img-fluid eye-img" id="togglePassword_2" />
+
+                                    </div>
+
+
+                                    <div class="form-group col-md-12 text-center">
+                                        <button type="submit" class="btn btn-custom">SIGN UP</button>
+                                    </div>
+                                    <div class="form-group col-md-12 text-center">
+                                        <p>Already have an account?  @Html.ActionLink("LogIn", "Login", "Account", "", new { @class = "link" })</p>
+                                    </div>
+
+                                </div>
+                            }
+
+
+
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/90013f5e15.js" crossorigin="anonymous"></script>
+
+    <script src="~/Scripts/main.js"></script>
+</body>
+</html>
+@*@if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+        }
+    }*@

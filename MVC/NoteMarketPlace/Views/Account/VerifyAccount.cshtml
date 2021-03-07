@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width" />
+    <title>VerifyAccount</title>
+</head>
+<body>
+    @if(ViewBag.Status !=null && Convert.ToBoolean(ViewBag.Status))
+    {
+        <div class="alert alert-success" >
+            <strong>Success ! </strong>Your account has been activated successfully.<br />Click Here To @Html.ActionLink("Login","Login","Account")
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Error! </strong>@ViewBag.Message
+
+        </div>
+    }
+</body>
+</html>

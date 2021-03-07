@@ -1,0 +1,135 @@
+#manage-admin{
+    margin-top:160px ;
+}
+/* ************************************************
+**********************serach********************
+************************************************ */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.00rem;
+    height: 2.375rem;
+    line-height: 2.00rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+.has-search{
+    width: 322px;
+    margin-left:65px ;
+}
+
+.title{
+    font-family: "Open Sans";
+    font-size: 34px;
+    font-weight: 600;
+   
+    color: #6255a5;
+    margin-bottom: 30px;
+}
+
+.btn-sec{
+    background: #6255a5;
+    height: auto;
+    border-radius: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -ms-border-radius:3px;
+    -o-border-radius:3px;
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+   right:  50px;
+}
+
+table{
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    padding: 15px;
+}
+
+table td i{
+    margin-left: 10px;
+    color: #d1d1d1;
+}
+td,th{
+    font-family: "Open Sans";
+}
+td{
+    font-size: 14px;
+}
+th{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    color: #333333;
+}
+.pagination {
+    display: inline-block;
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+
+  .active{
+      color: #ffffff !important;
+      background: #6255a5;
+     
+      font-family: "Open Sans";
+      font-weight: 400;
+      font-size: 14px;
+      
+  }
+
+  .two-icon img{
+      margin-right:10px ;
+  }
+  .input-group.md-form.form-sm.form-1 input{
+    border: 1px solid #d1d1d1;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+  .input-group-text{
+      background: #ffffff;
+      border-right: none;
+  }
+  .custom-input{
+      border-left: none !important;
+      margin-right:10px ;
+  }
+
+  .custom-btn{
+      margin-right:10px ;
+  }
+
+ .progress-table .table-row-scroll-1{
+    overflow-x:auto;
+    overflow-y:auto;
+}
+.admin-table{
+    margin-top:20px ;
+}
+
+@media only screen and (max-width: 700px) {
+  
+    .admin-table .table-row-scroll{
+        overflow-x:scroll;
+    }
+
+}
