@@ -32,10 +32,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link list-link" href="#">Search Notes </a>
+                            @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link" })
+                           
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link list-link" href="#">Sell Your Notes</a>
+                            @Html.ActionLink("Sell Your Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                           
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })

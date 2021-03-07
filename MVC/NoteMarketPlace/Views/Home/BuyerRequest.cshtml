@@ -40,16 +40,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item ">
-                        <a class="nav-link" href="#">Search Notes </a>
+                        @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link " })
+
+                       
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sell Your Notes</a>
+                        @Html.ActionLink("Sell Your Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+                       
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active-link" href="#">Buyer Request</a>
+                        @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
+
+                        <a class="nav-link active-link" href="#"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">FAQ</a>
+                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+                        
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })

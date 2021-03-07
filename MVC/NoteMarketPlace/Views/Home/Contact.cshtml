@@ -41,11 +41,12 @@
                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Sell Your Notes</a>
+                            @Html.ActionLink("Sell Your Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link" })
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " href="#">FAQ</a>
+                            @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
+                            
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })

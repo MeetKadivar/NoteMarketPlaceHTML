@@ -131,7 +131,7 @@ namespace NoteMarketPlace.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("BuyerRequest", "Home");
+                            return RedirectToAction("DashBoard", "Home");
                         }
                     }
                     else
