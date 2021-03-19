@@ -15,7 +15,7 @@
       <section id="header">
           <div class="img-container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
-                        <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
+                        <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                           <span class="navbar-toggler-icon"></span>
                         </button>
@@ -25,7 +25,7 @@
                               <a class="nav-link" href="Search.html">Search Notes </a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#">Sell Your Notes</a>
+                              <a class="nav-link active-link" href="#" >Sell Your Notes</a>
                             </li>
                             <li class="nav-item">
                                     <a class="nav-link" href="buyer_request.html">Buyer Request</a>
@@ -314,3 +314,374 @@
 
     </body>
 </html>
+
+<!-- 
+@model NoteMarketPlace.Models.AddNote
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="~/Content/addNote.css" rel="stylesheet" />
+    <link href="~/Content/header.css" rel="stylesheet" />
+    <link href="~/Content/footer.css" rel="stylesheet" />
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Add Notes</title>
+</head>
+<body>
+
+    <section id="header">
+        <div class="img-container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+                <a class="navbar-brand" href="#"><img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" /></a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Search Notes </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active-link" href="#">Sell Your Notes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#">Buyer Request</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <img src="~/Content/imges/person_1.jpg" alt="profile pic"
+                                         class="img-fluid rounded-circle">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">My Profile</a>
+                                    <a class="dropdown-item" href="#">My Downloads</a>
+                                    <a class="dropdown-item" href="#">My Sold Notes</a>
+                                    <a class="dropdown-item" href="#">My Rejected Notes</a>
+
+                                    <a class="dropdown-item" href="#">Change Password</a>
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                                }
+                            }
+
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="user-heading text-center">
+                            <h3>Sell Notes</h3>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section id="user_form">
+        <div class="container">
+
+            <form>
+                @using (Html.BeginForm("SellNote", "Home",FormMethod.Post,new { enctype = "multipart/form-data"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>Basic Notes Details</h3>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.Title)
+                            @Html.EditorFor(model => model.SellerNote.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your Title" } })
+
+                        
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.Category)
+
+                            @Html.DropDownListFor(m => m.SellerNote.Category,ViewBag.List as SelectList,"Select Categoory",new { @class= "form-control cate" })
+
+                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.DisplayPicture)
+                           
+                            <div class="drop-zone">
+                                <span class="drop-zone__prompt">
+                                    <img src="~/Content/fonts/upload.png" alt="upload"
+                                         class="img-fluid"><br>Upload a picture
+                                </span>
+                                <input type="file" id="pp" name="DisplayFile" class="drop-zone__input">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            <label for="upload">Upload Notes*</label>
+                            <div class="drop-zone">
+                                <span class="drop-zone__prompt">
+                                    <img src="~/Content/fonts/upload-note.png" alt="upload"
+                                         class="img-fluid"><br>Upload your note
+                                </span>
+                                <input type="file" id="pp" name="myFile" class="drop-zone__input">
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.NoteType)
+                            @Html.DropDownListFor(m => m.SellerNote.NoteType,ViewBag.TypeList as SelectList,"Select Type",new { @class = "form-control type" })
+                          
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.NumberofPages)
+                            @Html.EditorFor(model => model.SellerNote.NumberofPages, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Number Of Pages" } })
+                           
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.Description)
+                            @Html.TextAreaFor(model => model.SellerNote.Description,new { @class = "form-control", placeholder = "Enter the Description...", @rows = "5" } )
+
+
+
+                        </div>
+
+                    </div>
+
+
+                    <br>
+                    <br>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>Institution Information</h3>
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.SellerNote.Country)
+                            @Html.DropDownListFor(m => m.SellerNote.Country, ViewBag.CountryList as SelectList, "Select Country", new { @class = "form-control type" })
+
+
+                          
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.SellerNote.UniversityName)
+                            @Html.EditorFor(model => model.SellerNote.UniversityName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter The Collage" } })
+
+                            
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    <br><br>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>Course Details </h3>
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.SellerNote.Course)
+                            @Html.EditorFor(model => model.SellerNote.Course, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the course name" } })
+
+
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.SellerNote.CourseCode)
+                            @Html.EditorFor(model => model.SellerNote.CourseCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the course code" } })
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+
+                            @Html.LabelFor(model => model.SellerNote.Professor)
+                            @Html.EditorFor(model => model.SellerNote.Professor, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the professor name" } })
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <br>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>Selling Information</h3>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+
+                            <label>Sell For*</label><br>
+                            <div class="flex">
+
+                                @Html.RadioButtonFor(model => model.SellerNote.IsPaid, "Free", new { @class = "radio-form" })<label for="free" class="radio-label">Free</label>
+
+
+                                @Html.RadioButtonFor(model => model.SellerNote.IsPaid, "Paid", new { @class = "radio-form" }) <label for="paid" class="radio-label">Paid</label>
+                            </div> <br>
+
+                            @Html.LabelFor(model => model.SellerNote.SellingPrice)
+                            @Html.EditorFor(model => model.SellerNote.SellingPrice, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the selling price" } })
+
+
+                          
+
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="pre">Note Preview*</label>
+                            <div class="drop-zone">
+                                <span class="drop-zone__prompt">
+                                    <img src="~/Content/fonts/upload.png" alt="upload"
+                                         class="img-fluid"><br>Upload a picture
+                                </span>
+                                <input type="file" id="pp" name="myFile" class="drop-zone__input">
+                            </div>
+
+                            @*@Html.LabelFor(model => model.SellerNotesAttachement)
+                            @Html.EditorFor(model => model.SellerNotesAttachement.FileName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the file name" } })*@
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            @*<button class="btn form-btn">SAVE</button>*@
+                            <button class="btn form-btn" type="submit">PUBLISH</button>
+
+                        </div>
+
+                    </div>
+                }
+
+
+
+            </form>
+
+        </div>
+
+
+
+    </section>
+
+    <footer>
+        <hr>
+
+        <div class="footer-flex">
+            <div class="text-left">
+
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+            <div class="  text-right footer-icon">
+                <a href="#" class="facebook"> <img src="~/Content/fonts/facebook.png" alt="facebook" class="img-fluid" /></a>
+
+                <a href="#" class="twitter"> <img src="~/Content/fonts/twitter.png" alt="twitter" class="img-fluid" /></a>
+                <a href="#" class="linkedin">  <img src="~/Content/fonts/linkedin.png" alt="linkedin" class="img-fluid" /></a>
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/90013f5e15.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/main.js"></script>
+
+
+</body>
+</html> -->
