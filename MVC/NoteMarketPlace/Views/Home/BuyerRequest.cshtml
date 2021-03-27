@@ -42,20 +42,19 @@
                     <li class="nav-item ">
                         @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link " })
 
-                       
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Sell Your Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link" })
-                       
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
 
-                        <a class="nav-link active-link" href="#"></a>
+                        @Html.ActionLink("Sell Your Notes Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link " })
-                        
+                        @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
@@ -70,12 +69,13 @@
                                      class="img-fluid rounded-circle">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">My Profile</a>
-                                <a class="dropdown-item" href="#">My Downloads</a>
-                                <a class="dropdown-item" href="#">My Sold Notes</a>
-                                <a class="dropdown-item" href="#">My Rejected Notes</a>
-                                
-                                <a class="dropdown-item" href="#">Change Password</a>
+                                @Html.ActionLink("My Profile", "UserProfile", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("My Download", "Download", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("My Sold Note", "SoldNote", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("My Rejected Note", "RejectedNote", "Home", null, new { @class = "dropdown-item" })
+
+                                @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+
                                 @if (Request.IsAuthenticated)
                                 {
                                     using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -96,7 +96,7 @@
                             }
                         }
 
-                        
+
                     </li>
                 </ul>
             </div>
@@ -186,7 +186,10 @@
                                 foreach (var item in Model)
                                 {
 
+                                    if (item.IsSellerHasAllowedDownload == false)
+                                    {
 
+                                    
                                     <tr>
                                         <td>
 
@@ -204,7 +207,7 @@
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.NoteCategory)
-
+                                           
                                         </td>
                                         <td>
 
@@ -261,7 +264,7 @@
                                                 </button>
                                                 <div class="dropdown-content_1">
 
-                                                    <a href="#">Allow Download</a>
+                                                    <a href="@Url.Action("AllowDownload","Home",new { id = item.NoteID,downloader = item.Downloader})">Allow Download</a>
 
 
 
@@ -270,6 +273,7 @@
 
                                         </td>
                                     </tr>
+                                    }
                                 }
                             }
 

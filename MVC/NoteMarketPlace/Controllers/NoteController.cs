@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NoteMarketPlace.Models;
+
 
 namespace NoteMarketPlace.Controllers
 {
@@ -15,12 +17,18 @@ namespace NoteMarketPlace.Controllers
         {
             if((search == null || search == "") && (Type == null && Country == null && Course==null && Category == null && Uni == null && Rating == null))
             {
+                //var countrylist = db.Countries.ToList();
+                //ViewBag.CountryList = new SelectList(countrylist, "ID", "Name");
+
+                //var typelist = db.NoteTypes.ToList();
+                //ViewBag.TypeList = new SelectList(typelist,"")
+
 
                 var res= db.SellerNotes.ToList();
                 ViewBag.TotalPages = Math.Ceiling(res.Count() / 6.0);
+                ViewBag.TotalNote = res.Count();
                 ViewBag.PageNumber = PageNumber;
                 res = res.Skip((PageNumber - 1) * 6).Take(6).ToList();
-
                 return View(res);
 
             }
@@ -29,7 +37,13 @@ namespace NoteMarketPlace.Controllers
                 ViewBag.Message = search;
                
                     var res = db.SellerNotes.Where(x => x.Title.Contains(search) || x.NoteType1.Name == Type || x.Country1.Name == Country || x.NoteCategory.Name == Category || x.UniversityName == Uni || x.Course == Course).Distinct().ToList();
-                    return View(res);
+
+                ViewBag.TotalPages = Math.Ceiling(res.Count() / 6.0);
+                ViewBag.PageNumber = PageNumber;
+                ViewBag.TotalNote = res.Count();
+                res = res.Skip((PageNumber - 1) * 6).Take(6).ToList();
+                
+                return View(res);
 
              
 

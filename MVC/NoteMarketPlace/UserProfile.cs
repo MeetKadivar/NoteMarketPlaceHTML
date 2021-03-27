@@ -11,24 +11,35 @@ namespace NoteMarketPlace
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class UserProfile
     {
         public int ID { get; set; }
         public int UserID { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> Gender { get; set; }
+      
         public string SecondaryEmailAddres { get; set; }
         public string CountryCode { get; set; }
+        [Required]
         public string PhoneNumber { get; set; }
         public string ProfilePicture { get; set; }
+        [Required]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string State { get; set; }
+        [Required]
         public string ZipCode { get; set; }
+        [Required]
         public string Country { get; set; }
+        [Required]
         public string University { get; set; }
+        [Required]
         public string College { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> CreatedBy { get; set; }
@@ -38,5 +49,15 @@ namespace NoteMarketPlace
     
         public virtual ReferenceData ReferenceData { get; set; }
         public virtual User User { get; set; }
+        
+        public string SelectGender { get; set; }
+       
+        public string FristName { get; set; }
+       
+        public string LastName { get; set; }
+       
+        public HttpPostedFileBase DisplayFile { get; set; }
+
+
     }
 }

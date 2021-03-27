@@ -32,20 +32,34 @@ namespace NoteMarketPlace
         public string AdminRemarks { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public Nullable<System.DateTime> PublishedDate { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public int Category { get; set; }
+       
         public string DisplayPicture { get; set; }
+        [Required]
         public Nullable<int> NoteType { get; set; }
+        [Required]
         public Nullable<int> NumberofPages { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string UniversityName { get; set; }
+        [Required]
         public Nullable<int> Country { get; set; }
+        [Required]
         public string Course { get; set; }
+        [Required]
         public string CourseCode { get; set; }
+        [Required]
         public string Professor { get; set; }
+        
         public bool IsPaid { get; set; }
         public Nullable<double> SellingPrice { get; set; }
         public string NotesPreview { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
@@ -66,6 +80,11 @@ namespace NoteMarketPlace
         public virtual ICollection<SellerNotesReportedIssue> SellerNotesReportedIssues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SellerNotesReview> SellerNotesReviews { get; set; }
+       
         public HttpPostedFileBase DisplayFile { get; set; }
+       
+        public HttpPostedFileBase NotePreviewFile { get; set; }
+
+        public string PaidInfo { get; set; }
     }
 }

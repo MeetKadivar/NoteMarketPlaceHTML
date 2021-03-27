@@ -1,0 +1,512 @@
+﻿@model NoteMarketPlace.Models.AddNote
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="~/Content/addNote.css" rel="stylesheet" />
+    <link href="~/Content/header.css" rel="stylesheet" />
+    <link href="~/Content/footer.css" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #uploader_img, #uploader_img-1, #uploader_img-2 {
+            border: 1px solid #d1d1d1;
+            color: #cccccc;
+            padding-top: 15px;
+        }
+
+        #lable_img, #lable_img-1, #lable_img-2 {
+            color: #cccccc;
+        }
+    </style>
+
+    <title>Add Notes</title>
+</head>
+<body>
+
+    <section id="header">
+        <div class="img-container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+                <a class="navbar-brand" href="#"><img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" /></a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item ">
+                            @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link " })
+
+                        </li>
+                        <li class="nav-item">
+
+                            @Html.ActionLink("Sell Your Notes Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                        </li>
+
+                        <li class="nav-item">
+                            @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
+
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <img src="~/Content/imges/person_1.jpg" alt="profile pic"
+                                         class="img-fluid rounded-circle">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @Html.ActionLink("My Profile", "UserProfile", "Home", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Download", "Download", "Home", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Sold Note", "SoldNote", "Home", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Rejected Note", "RejectedNote", "Home", null, new { @class = "dropdown-item" })
+
+                                    @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                                }
+                            }
+
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="user-heading text-center">
+                            <h3>Sell Notes</h3>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section id="user_form">
+        <div class="container">
+
+            <form method="post" enctype="multipart/form-data">
+                @using (Html.BeginForm("SellNote", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.SellerNote.ID)
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>Basic Notes Details</h3>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.Title)
+                            @Html.EditorFor(model => model.SellerNote.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your Title" } })
+                            @Html.ValidationMessageFor(model => model.SellerNote.Title, "", new { @class = "text-danger" })
+
+
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.Category)
+
+                            @Html.DropDownListFor(m => m.SellerNote.Category, ViewBag.List as SelectList, "Select Categoory", new { @class = "form-control cate" })
+                            @Html.ValidationMessageFor(model => model.SellerNote.Category, "", new { @class = "text-danger" })
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Display Image
+                            <div id="uploader_img" class="text-center">
+
+
+                                <label for="uploader_input" class="btn text-center" id="lable_img">
+                                    <img src="~/Content/fonts/upload.png" /><br />
+                                    Upload The Display Photos
+                                </label>
+
+
+                                @Html.TextBoxFor(model => model.SellerNote.DisplayFile, new { type = "file", @class = "form-control", name = "DisplayFile", id = "uploader_input", style = "visibility:hidden;", accept = "image/jpeg, image/jpg, image/png" })
+                                @Html.ValidationMessageFor(model => model.SellerNote.DisplayFile, "", new { @class = "text-danger" })
+                                <div id="my_file" style="color:#000000"></div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            Upload Notes*
+                            <div id="uploader_img-1" class="text-center">
+
+
+                                <label for="uploader_input-1" class="btn text-center" id="lable_img-1">
+                                    <img src="~/Content/fonts/upload-note.png" /><br />
+                                    Upload The Note
+                                </label>
+
+
+                                @Html.TextBoxFor(model => model.SellerNotesAttachement.NoteFile, new { type = "file", @class = "form-control", name = "NoteFile", style = "visibility:hidden;", id = "uploader_input-1", accept = "application/pdf" })
+                                @Html.ValidationMessageFor(model => model.SellerNotesAttachement.NoteFile, "", new { @class = "text-danger" })
+                                <div id="my_file-1" style="color:#000000"></div>
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.NoteType)
+                            @Html.DropDownListFor(m => m.SellerNote.NoteType, ViewBag.TypeList as SelectList, "Select Type", new { @class = "form-control type" })
+                            @Html.ValidationMessageFor(model => model.SellerNote.NoteType, "", new { @class = "text-danger" })
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.NumberofPages)
+                            @Html.EditorFor(model => model.SellerNote.NumberofPages, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Number Of Pages" } })
+                            @Html.ValidationMessageFor(model => model.SellerNote.NumberofPages, "", new { @class = "text-danger" })
+
+
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SellerNote.Description)
+                            @Html.TextAreaFor(model => model.SellerNote.Description, new { @class = "form-control", placeholder = "Enter the Description...", @rows = "5" })
+                            @Html.ValidationMessageFor(model => model.SellerNote.Description, "", new { @class = "text-danger" })
+
+
+
+                        </div>
+
+                    </div>
+
+
+                    <br>
+                    <br>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>Institution Information</h3>
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.SellerNote.Country)
+                            @Html.DropDownListFor(m => m.SellerNote.Country, ViewBag.CountryList as SelectList, "Select Country", new { @class = "form-control type" })
+                            @Html.ValidationMessageFor(model => model.SellerNote.Country, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.SellerNote.UniversityName)
+                            @Html.EditorFor(model => model.SellerNote.UniversityName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter The Collage" } })
+                            @Html.ValidationMessageFor(model => model.SellerNote.UniversityName, "", new { @class = "text-danger" })
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    <br><br>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>Course Details </h3>
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.SellerNote.Course)
+                            @Html.EditorFor(model => model.SellerNote.Course, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the course name" } })
+                            @Html.ValidationMessageFor(model => model.SellerNote.Course, "", new { @class = "text-danger" })
+
+
+
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.SellerNote.CourseCode)
+                            @Html.EditorFor(model => model.SellerNote.CourseCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the course code" } })
+                            @Html.ValidationMessageFor(model => model.SellerNote.CourseCode, "", new { @class = "text-danger" })
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+
+                            @Html.LabelFor(model => model.SellerNote.Professor)
+                            @Html.EditorFor(model => model.SellerNote.Professor, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the professor name" } })
+                            @Html.ValidationMessageFor(model => model.SellerNote.Professor, "", new { @class = "text-danger" })
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <br>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h3>Selling Information</h3>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+
+                            <label>Sell For*</label><br>
+                            <div class="flex">
+
+                                @if (Model.SellerNote.IsPaid == true)
+                                {
+                                    @Html.RadioButtonFor(model => model.SellerNote.IsPaid, "Free", new { @class = "radio-form" })<label for="free" class="radio-label">Free</label>
+
+
+                                    @Html.RadioButtonFor(model => model.SellerNote.IsPaid, "Paid", new { @class = "radio-form", @checked = "checked" }) <label for="paid" class="radio-label">Paid</label>
+
+                                }
+                                else
+                                {
+                                    @Html.RadioButtonFor(model => model.SellerNote.PaidInfo, "Free", new { @class = "radio-form", @checked = "checked" })<label for="free" class="radio-label">Free</label>
+
+
+                                    @Html.RadioButtonFor(model => model.SellerNote.PaidInfo, "Paid", new { @class = "radio-form" }) <label for="paid" class="radio-label">Paid</label>
+
+                                }
+
+                            </div> <br>
+
+
+                            @if (Model.SellerNote.IsPaid != true)
+                            {
+
+                                @Html.LabelFor(model => model.SellerNote.SellingPrice)
+                                @Html.EditorFor(model => model.SellerNote.SellingPrice, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the selling price", id = "price-input", disabled = "disabled" } })
+
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.SellerNote.SellingPrice)
+                                @Html.EditorFor(model => model.SellerNote.SellingPrice, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the selling price", id = "price-input" } })
+
+                            }
+
+
+
+
+
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+
+                            Note Preview*
+                            <div id="uploader_img-2" class="text-center">
+
+
+                                <label for="uploader_input-2" class="btn text-center" id="lable_img-2">
+                                    <img src="~/Content/fonts/upload-note.png" /><br />
+                                    Upload The Note
+                                </label>
+
+
+                                @Html.TextBoxFor(model => model.SellerNote.NotePreviewFile, new { type = "file", @class = "form-control", name = "NotePreviewFile", style = "visibility:hidden;", id = "uploader_input-2", accept = "application/pdf" })
+
+                                <div id="my_file-2" style="color:#000000"></div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button class="btn form-btn" type="button">SAVE</button>
+                            <button class="btn form-btn" type="submit" onclick="return confirm('Are you sure you want to publish the note?');">PUBLISH</button>
+
+                        </div>
+
+                    </div>
+                }
+
+
+
+            </form>
+
+        </div>
+
+
+
+    </section>
+
+    <footer>
+        <hr>
+
+        <div class="footer-flex">
+            <div class="text-left">
+
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+            <div class="  text-right footer-icon">
+                <a href="#" class="facebook"> <img src="~/Content/fonts/facebook.png" alt="facebook" class="img-fluid" /></a>
+
+                <a href="#" class="twitter"> <img src="~/Content/fonts/twitter.png" alt="twitter" class="img-fluid" /></a>
+                <a href="#" class="linkedin">  <img src="~/Content/fonts/linkedin.png" alt="linkedin" class="img-fluid" /></a>
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/90013f5e15.js" crossorigin="anonymous"></script>
+
+    <script>
+
+
+
+        $('#lable_img').click(function () {
+            $('#uploader_input').trigger('click');
+            $('#uploader_input').change(function () {
+                var filename = $('#uploader_input').val();
+                if (filename.substring(3, 11) == 'fakepath') {
+                    filename = filename.substring(12);
+                } // Remove c:\fake at beginning from localhost chrome
+                $('#lable_img').hide();
+                $('#my_file').html(filename);
+            });
+        });
+
+
+        $('#lable_img-1').click(function () {
+            $('#uploader_input-1').trigger('click');
+            $('#uploader_input-1').change(function () {
+                var filename = $('#uploader_input-1').val();
+                if (filename.substring(3, 11) == 'fakepath') {
+                    filename = filename.substring(12);
+                } // Remove c:\fake at beginning from localhost chrome
+                $('#lable_img-1').hide();
+                $('#my_file-1').html(filename);
+            });
+        });
+
+
+
+        $('#lable_img-2').click(function () {
+            $('#uploader_input-2').trigger('click');
+            $('#uploader_input-2').change(function () {
+                var filename = $('#uploader_input-2').val();
+                if (filename.substring(3, 11) == 'fakepath') {
+                    filename = filename.substring(12);
+                } // Remove c:\fake at beginning from localhost chrome
+                $('#lable_img-2').hide();
+                $('#my_file-2').html(filename);
+            });
+        });
+
+
+        $('input[type="radio"]').change(function () {
+            var value = $('input[type="radio"]:checked').val();
+
+            if (value == "Paid") {
+                $('#price-input').removeAttr('disabled');
+            }
+            else {
+                $('#price-input').attr("disabled", true);
+            }
+
+
+        });
+    </script>
+
+    <script src="~/Scripts/main.js"></script>
+
+
+</body>
+</html>

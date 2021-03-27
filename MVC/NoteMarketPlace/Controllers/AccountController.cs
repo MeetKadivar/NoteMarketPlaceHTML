@@ -29,43 +29,54 @@ namespace NoteMarketPlace.Controllers
 
             if(ModelState.IsValid)
             {
-                var IsExist = IsEmailExist(user.Email);
-
-                if (IsExist)
+                if (user.Password == user.ConfirmPassword)
                 {
-                    ModelState.AddModelError("EmailExist", "Email already exist");
-                    return View(user);
+                    var IsExist = IsEmailExist(user.Email);
+
+                    if (IsExist)
+                    {
+                        ModelState.AddModelError("EmailExist", "Email already exist");
+                        return View(user);
+                    }
+
+
+                    user.ActivationCode = Guid.NewGuid();
+                    //user.Password = Crypto.Hash(user.Password);
+                    //user.ConfirmPassword = Crypto.Hash(user.ConfirmPassword);
+                    user.IsActive = true;
+                    user.IsEmailVerify = false;
+                    user.RoleID = 1;
+                    using (NoteMarketPlaceEntities dc = new NoteMarketPlaceEntities())
+                    {
+                        try
+                        {
+
+                            dc.Users.Add(user);
+
+                            dc.SaveChanges();
+                           
+
+                        }
+                        catch (Exception e)
+                        {
+
+                            return View(e.Message);
+                        }
+
+                        SendverificationLinkEmail(user.Email, user.ActivationCode.ToString());
+                        Message = "Registration successfully done.check your email for verification";
+                        Status = true;
+                       
+                       
+
+                    }
                 }
 
 
-                user.ActivationCode = Guid.NewGuid();
-                //user.Password = Crypto.Hash(user.Password);
-                //user.ConfirmPassword = Crypto.Hash(user.ConfirmPassword);
-                user.IsActive = true;
-                user.IsEmailVerify = false;
-                user.RoleID = 1;
-                using(NoteMarketPlaceEntities dc =new NoteMarketPlaceEntities())
+                else
                 {
-                    try
-                    {
-                        
-                        dc.Users.Add(user);
-                    
-                        dc.SaveChanges();
-                    }
-                    catch (Exception e)
-                    {
-
-                        return View(e.Message);
-                    }
-                    
-                    SendverificationLinkEmail(user.Email, user.ActivationCode.ToString());
-                    Message = "Registration successfully done.check your email for verification" ;
-                    Status = true;
-
+                    ViewBag.password = "password does not match";
                 }
-
-
 
             }
             else
@@ -76,7 +87,8 @@ namespace NoteMarketPlace.Controllers
             ViewBag.Status = Status;
             return View(user);
         }
-        
+       
+
         public ActionResult VerifyAccount(string ID)
         {
             bool Status = false;

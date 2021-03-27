@@ -77,25 +77,26 @@
                     <li class="nav-item ">
                         @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link " })
 
+                    </li>
+                    <li class="nav-item">
+
+                        @Html.ActionLink("Sell Your Notes Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link " })
 
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Sell Your Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+                        @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link" })
 
                     </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
 
-                        <a class="nav-link active-link" href="#"></a>
-                    </li>
                     <li class="nav-item">
-                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
 
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
 
                     </li>
+
                     <li class="nav-item">
                         <div class="dropdown">
                             <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
@@ -105,17 +106,18 @@
                                      class="img-fluid rounded-circle">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">My Profile</a>
-                                <a class="dropdown-item" href="#">My Downloads</a>
-                                <a class="dropdown-item" href="#">My Sold Notes</a>
-                                <a class="dropdown-item" href="#">My Rejected Notes</a>
+                                @Html.ActionLink("My Profile", "UserProfile", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("My Download", "Download", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("My Sold Note", "SoldNote", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("My Rejected Note", "RejectedNote", "Home", null, new { @class = "dropdown-item" })
 
-                                <a class="dropdown-item" href="#">Change Password</a>
+                                @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+
                                 @if (Request.IsAuthenticated)
                                 {
                                     using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
                                     {
-                                <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
                                     }
                                 }
 
@@ -127,12 +129,13 @@
                         {
                             using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
                             {
-                        <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
                             }
                         }
 
 
                     </li>
+
                 </ul>
             </div>
         </nav>
@@ -274,7 +277,7 @@
 
                                                 @if (item.ReferenceData.Value == "Draft")
                                                 {
-                                                    <td class="two-icon"><a href="addNote.html"><img src="~/Content/fonts/edit.png" alt="edit" class="img-fluid"></a>
+                                                    <td class="two-icon"><a href="@Url.Action("EditNote","Home",new {id = item.ID })"><img src="~/Content/fonts/edit.png" alt="edit" class="img-fluid"></a>
                                                                          <a href="@Url.Action("Delete","Note",new {id = item.ID })" onclick="return confirm('Are you sure you want to Delete?')" >
                                                                              <img src="~/Content/fonts/delete.png" alt="delete"/>
                                                                          </a>                                                                                                                                     
@@ -282,7 +285,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <td><a href="notes-details.html"><img src="~/Content/fonts/eye.png" alt="eye" class="img-fluid img-eye"></a></td>
+                                                    <td><a href="@Url.Action("NoteDetails","Home",new {id = item.ID })"><img src="~/Content/fonts/eye.png" alt="eye" class="img-fluid img-eye"></a></td>
                                                 }
 
 
@@ -379,7 +382,7 @@
                                                 }
 
 
-                                                <td><a href="notes-details.html"><img src="~/Content/fonts/eye.png" alt="eye" class="img-fluid img-eye"></a></td>
+                                                <td><a href="@Url.Action("NoteDetails","Home",new {id = item.ID })"><img src="~/Content/fonts/eye.png" alt="eye" class="img-fluid img-eye"></a></td>
                                             </tr>
                                         }
 

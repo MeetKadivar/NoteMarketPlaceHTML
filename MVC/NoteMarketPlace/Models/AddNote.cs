@@ -7,6 +7,7 @@ namespace NoteMarketPlace.Models
 {
     public class AddNote
     {
+       
         public SellerNote SellerNote { get; set; }
         public SellerNotesAttachement SellerNotesAttachement { get; set; }
     }

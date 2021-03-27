@@ -37,16 +37,14 @@
 
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                             <li class="nav-item active">
-                                @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link" })
-                                
+                                <a class="nav-link list-link" href="#">Search Notes </a>
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Sell Your Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link" })
-                             
+                                <a class="nav-link list-link" href="#">Sell Your Notes</a>
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link" })
-                              
+                                @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
+                               
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })

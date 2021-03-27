@@ -1,4 +1,5 @@
-﻿@model IEnumerable<NoteMarketPlace.SellerNote>
+﻿@*@model IEnumerable<NoteMarketPlace.Models.NoteListing>*@
+@model IEnumerable<NoteMarketPlace.SellerNote>
 
 
 @{
@@ -17,6 +18,12 @@
     <link href="~/Content/search.css" rel="stylesheet">
     <link href="~/Content/footer_logo.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .Note_Title_link{
+            color:#6255a5 !important;
+
+        }
+    </style>
 
     <title >Serach Notes</title>
 </head>
@@ -37,21 +44,73 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Sell Your Notes</a>
+
+                            @Html.ActionLink("Sell Your Notes Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " href="#">FAQ</a>
+                            @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
 
                         </li>
 
-                        <li class="nav-item ">
-                            @Html.ActionLink("LogIn", "Login", "Account", new { area = "" }, new { @class = "nav-link nav-login text-center" })
-                          
-                        </li>
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                            </li>
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        <img src="~/Content/imges/person_1.jpg" alt="profile pic"
+                                             class="img-fluid rounded-circle">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">My Profile</a>
+                                        <a class="dropdown-item" href="#">My Downloads</a>
+                                        <a class="dropdown-item" href="#">My Sold Notes</a>
+                                        <a class="dropdown-item" href="#">My Rejected Notes</a>
+
+                                        <a class="dropdown-item" href="#">Change Password</a>
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                            {
+                                                <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                            }
+                                        }
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                                    }
+                                }
+
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ">
+                                @Html.ActionLink("LogIn", "Login", "Account", new { area = "" }, new { @class = "nav-link nav-login text-center" })
+
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </nav>
@@ -127,7 +186,7 @@
                             <option selected>Select University</option>
                             @{
                                 int Unicount = 1;
-                                foreach (var item in Model.Select(s => s.UniversityName).Distinct())
+                                foreach (var item in Model.Select(s => s.UniversityName))
                                 {
                                     <option id="NoteType-@(Unicount++)">@item</option>
                                 }
@@ -190,7 +249,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Total 18 notes  @ViewBag.Message</h3>
+                    <h3>Total @ViewBag.TotalNote notes  @ViewBag.Message</h3>
                   
                 </div>
 
@@ -217,14 +276,15 @@
                                 </div>
                                 <div class="book-des">
                                     <ul>
-                                        <li class="Note_Title-@(i++)"><h5 class="Note_Title">@item.Title</h5></li>
-                                        <li class="book-details"><img src="~/Content/fonts/university.png" alt="university" class="img-fluid">  University Of Gujrat,India</li>
+                                        <li class="Note_Title-@(i++)"><h5 class="Note_Title">@Html.ActionLink(item.Title, "NoteDetails","Home",new { id = item.ID},new { @class="Note_Title_link"})   </h5></li>
+                                        <li class="book-details"><img src="~/Content/fonts/university.png" alt="university" class="img-fluid">@item.UniversityName,@item.Country1.Name  </li>
                                         <li class="book-details"><img src="~/Content/fonts/pages.png" alt="page" class="img-fluid"> @item.NumberofPages Pages</li>
-                                        <li class="book-details"><img src="~/Content/fonts/calendar.png" alt="cal" class="img-fluid">  Thu,Nov 26 2020 </li>
-                                        <li class="book-details report"><img src="~/Content/fonts/flag.png" alt="flag" class="img-fluid"> <span> User Marked this note as inappropriate </span></li>
+                                        <li class="book-details"><img src="~/Content/fonts/calendar.png" alt="cal" class="img-fluid"> @item.PublishedDate</li>
+                                        <li class="book-details report"><img src="~/Content/fonts/flag.png" alt="flag" class="img-fluid"> <span> @item.SellerNotesReportedIssues.Count() User Marked this note as inappropriate </span></li>
                                         <li class="book-review">
+                                         
                                             <img src="~/Content/fonts/star.png" alt="star" class="img-fluid"><img src="~/Content/fonts/star.png" alt="star" class="img-fluid">
-                                            <img src="~/Content/fonts/star.png" alt="star" class="img-fluid"><img src="~/Content/fonts/star.png" alt="star" class="img-fluid"><img src="~/Content/fonts/star-white.png" alt="star" class="img-fluid">100 reviews
+                                            <img src="~/Content/fonts/star.png" alt="star" class="img-fluid"><img src="~/Content/fonts/star.png" alt="star" class="img-fluid"><img src="~/Content/fonts/star-white.png" alt="star" class="img-fluid">@item.SellerNotesReviews.Count() reviews
                                         </li>
                                     </ul>
 
@@ -237,7 +297,7 @@
                 }
                 <div class="col-md-12 text-center">
                     <div class="pagination">
-                        <a href="#">&laquo;</a>
+                        
                         @{
                             double totalPages = ViewBag.TotalPages;
                             if (totalPages > 1)
@@ -282,7 +342,7 @@
                         }
 
 
-                        <a href="#">&raquo;</a>
+                       
                     </div>
 
                 </div>

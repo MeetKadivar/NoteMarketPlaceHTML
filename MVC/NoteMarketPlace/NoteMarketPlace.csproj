@@ -157,6 +157,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AddNote.cs" />
+    <Compile Include="Models\NoteDetails.cs" />
+    <Compile Include="Models\NoteListing.cs" />
     <Compile Include="Models\ResetPassword.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="NoteCategory.cs">
@@ -271,6 +273,29 @@
     <Content Include="Content\imges\person_3.jpg" />
     <Content Include="Content\imges\person_4.jpg" />
     <Content Include="Content\imges\top-logo.png" />
+    <Content Include="Images\Member\person_1211128245.jpg" />
+    <Content Include="Images\Member\person_1211627550.jpg" />
+    <Content Include="Images\Member\person_2210324215.jpg" />
+    <Content Include="Images\Member\person_2211521952.jpg" />
+    <Content Include="Images\Member\person_2212443145.jpg" />
+    <Content Include="Images\Member\person_2213327287.jpg" />
+    <Content Include="Images\Member\person_2215249714.jpg" />
+    <Content Include="Images\Member\person_2215559541.jpg" />
+    <Content Include="Images\Member\person_3212151217.jpg" />
+    <Content Include="Images\Notes\book_1210026746.jpg" />
+    <Content Include="Images\Notes\book_1210330905.jpg" />
+    <Content Include="Images\Notes\book_1213128203.jpg" />
+    <Content Include="Images\Notes\book_1214158055.jpg" />
+    <Content Include="Images\Notes\book_1215531009.jpg" />
+    <Content Include="Images\Notes\book_1215755651.jpg" />
+    <Content Include="Images\Notes\book_2.jpg" />
+    <Content Include="Images\Notes\book_3.jpg" />
+    <Content Include="Images\Notes\book_4.jpg" />
+    <Content Include="Images\Notes\book_5.jpg" />
+    <Content Include="Images\Notes\book_6.jpg" />
+    <Content Include="Images\Notes\book_6211728628.jpg" />
+    <Content Include="Images\Notes\full_book.jpg" />
+    <Content Include="Images\Notes\full_book214413141.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -296,6 +321,10 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="NotePdf\TSC Training Plan for Batch 2020-2021210331604.pdf" />
+    <Content Include="NotePdf\TSC Training Plan for Batch 2020-2021211728911.pdf" />
+    <Content Include="NotePdf\TSC Training Plan for Batch 2020-2021213128890.pdf" />
+    <Content Include="NotePdf\TSC Training Plan for Batch 2020-2021214158411.pdf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -333,10 +362,16 @@
     <Content Include="Views\Note\NoteListing.cshtml" />
     <Content Include="Views\Home\DashBoard.cshtml" />
     <Content Include="Views\Home\SellNote.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Home\Download.cshtml" />
+    <Content Include="Views\Home\SoldNote.cshtml" />
+    <Content Include="Views\Home\RejectedNote.cshtml" />
+    <Content Include="Views\Home\NoteDetails.cshtml" />
+    <Content Include="Views\Home\EditNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\Notes\" />
+    <Folder Include="NotePdf\Preview\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

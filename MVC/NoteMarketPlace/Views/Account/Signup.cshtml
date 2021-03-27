@@ -96,7 +96,7 @@
                                         </div>
                                         @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", id = "inputpassword_2", placeholder = "Password" } })
                                         @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "error" })
-
+                                        <span class="text-danger">@ViewBag.password</span>
                                         <img src="~/Content/fonts/eye.png" alt="eye" class="img-fluid eye-img" id="togglePassword_2" />
 
                                     </div>

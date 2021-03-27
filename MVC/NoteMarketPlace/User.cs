@@ -41,9 +41,9 @@ namespace NoteMarketPlace
         [DataType(DataType.Password)]
 
         public string Password { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Password Required")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Password Required")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Confirm password and password do not match")]
+        //[Compare("Password", ErrorMessage = "Confirm password and password do not match")]
         public string ConfirmPassword { get; set; }
 
         public bool IsEmailVerify { get; set; }

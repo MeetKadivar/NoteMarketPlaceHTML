@@ -1,0 +1,426 @@
+﻿@model NoteMarketPlace.Models.NoteDetails
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+   
+    <link href="~/Content/footer_logo.css" rel="stylesheet" />
+    <link href="~/Content/header.css" rel="stylesheet">
+    <link href="~/Content/notes_details.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style>
+        .link_button1 , .link_button1 a{
+            color: white !important;
+        }
+    </style>
+
+    <title>Note Details</title>
+</head>
+
+<body>
+
+    <section id="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="#"><img src="~/Content/imges/logo.png" alt="logo" class="img-fluid"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item active">
+                        @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link " })
+
+                    </li>
+                    <li class="nav-item">
+
+                        @Html.ActionLink("Sell Your Notes Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                    </li>
+
+
+
+
+                    @if (Request.IsAuthenticated)
+                    {
+
+                <li class="nav-item">
+                    @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+                    
+                </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <img src="~/Content/imges/person_1.jpg" alt="profile pic"
+                                         class="img-fluid rounded-circle">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @Html.ActionLink("My Profile", "UserProfile", "Home", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Download", "Download", "Home", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Sold Note", "SoldNote", "Home", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Rejected Note", "RejectedNote", "Home", null, new { @class = "dropdown-item" })
+
+                                    @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                                }
+                            }
+
+
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item ">
+                            @Html.ActionLink("LogIn", "Login", "Account", new { area = "" }, new { @class = "nav-link nav-login text-center" })
+
+                        </li>
+                    }
+
+
+
+
+
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+    </section>
+
+
+    <section id="book">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Notes Details</h5>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="book-img ">
+                              
+                                <img src="~/Images/Notes/@ViewBag.url" class="img-fluid" alt="full book"/>
+
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="book_details">
+                                <h3>@Html.DisplayFor(x => x.sellernote.Title)</h3>
+                                <p>@Html.DisplayFor(x => x.sellernote.Course)</p>
+                                <p class="book_details_des">
+
+                                    @Html.DisplayFor(x => x.sellernote.Description)
+                                </p>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    if (Model.sellernote.IsPaid == true)
+                                    {
+
+                                        <button class="btn link_button1" >
+                                            @Html.ActionLink((string)ViewBag.Price, "AddBuyerRequest", "Home", new { id = ViewBag.id ,buyer = ViewBag.Email }, new { onclick = "return confirm('Your request is sent to the buyer');" } )
+                               
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn" data-toggle="modal" data-target="#exampleModal">
+                                            @Html.ActionLink("Download", "DownloadFile", "Home", new { id = ViewBag.id}, new { @class = "link_button1" })
+                                        </button>
+                                    }
+                                }
+                                else
+                                {
+                                    <button class="btn link_button1" >
+                                        @Html.ActionLink("Download", "Login", "Account", "", new { onclick = "return confirm('Please sigin / register to download this note.');"   })
+                                    </button>
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-6 text-left left_details">
+                            Institution:
+
+                        </div>
+                        <div class="col-md-6 text-right right_details">
+                            
+                            @Html.DisplayFor(x => x.sellernote.UniversityName)
+
+                        </div>
+                        <div class="col-md-6 text-left left_details">
+                            Country:
+
+                        </div>
+                        <div class="col-md-6 text-right right_details">
+                            @Html.DisplayFor(x=>x.sellernote.Country1.Name)
+                           
+
+                        </div>
+
+                        <div class="col-md-6 text-left left_details">
+                            Course Name:
+
+                        </div>
+                        <div class="col-md-6 text-right right_details">
+                            @Html.DisplayFor(x => x.sellernote.Course)
+                            
+
+                        </div>
+                        <div class="col-md-6 text-left left_details">
+                            Course Code:
+
+                        </div>
+                        <div class="col-md-6 text-right right_details">
+                            @Html.DisplayFor(x =>x.sellernote.CourseCode)
+
+                        </div>
+                        <div class="col-md-6 text-left left_details">
+                            Professor:
+
+                        </div>
+                        <div class="col-md-6 text-right right_details">
+                            @Html.DisplayFor(x => x.sellernote.Professor)
+
+                        </div>
+
+                        <div class="col-md-6 text-left left_details">
+                            Number Of Pages:
+
+                        </div>
+                        <div class="col-md-6 text-right right_details">
+                            @Html.DisplayFor(x => x.sellernote.NumberofPages)
+
+                        </div>
+                        <div class="col-md-6 text-left left_details">
+                            Approved Date:
+
+                        </div>
+                        <div class="col-md-6 text-right right_details">
+                            @Html.DisplayFor(x=>x.sellernote.CreatedDate)
+
+                        </div>
+                        <div class="col-md-6 text-left left_details">
+                            Rating:
+
+                        </div>
+                        <div class="col-md-6 text-right right_details star">
+                            @for (int k = 1; k <= ViewBag.Rating; k++)
+                            {
+                                <img src="~/Content/fonts/star.png" alt="star" class="img-fluid">
+                            }
+                            
+                            @for (int m = 1; m <= (5 - ViewBag.Rating); m++)
+                            {
+                                <img src="~/Content/fonts/star-white.png" alt="star" class="img-fluid">
+                            }
+                           
+                            @ViewBag.Total Reviews
+
+                        </div>
+                        <div class="col-md-12">
+                            <small>@ViewBag.Issue User marked this note as inappropriate</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+
+            </div>
+
+        </div>
+
+    </div>
+    <section id="preview">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+
+                    <h3>Notes Preview</h3>
+
+                    <div id="Iframe-Cicis-Menu-To-Go" class="set-margin-cicis-menu-to-go set-padding-cicis-menu-to-go set-border-cicis-menu-to-go set-box-shadow-cicis-menu-to-go center-block-horiz">
+                        <div class="responsive-wrapper
+                                   responsive-wrapper-padding-bottom-90pct"
+                             style="-webkit-overflow-scrolling: touch; overflow: auto;">
+                            <iframe src="~/NotePdf/Preview/@ViewBag.preview">
+                                <p style="font-size: 110%;">
+                                    <em>
+                                        <strong>ERROR: </strong>
+                                        An &#105;frame should be displayed here but your browser version does not support &#105;frames.
+                                    </em> Please update your browser to its most recent version and try again, or access the file <a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">with this link.</a>
+                                </p>
+                            </iframe>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-7" >
+                    <h3>Customer Reviews</h3>
+                    <div class="review_box" style="overflow-y:scroll;overflow-x:scroll;">
+                        @if (ViewBag.Total != 0)
+                        {
+
+                            foreach (var model in Model.review)
+                            {
+
+
+
+
+                            <div class="row">
+
+                                <div class="col-md-2">
+
+                                    <img src="~/Content/imges/person_1.jpg" alt="person" class="img-fluid rounded-circle nav-link-img profile-pic">
+
+                                </div>
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(x => model.User.FirstName) @Html.DisplayFor(x => model.User.LastName)
+                                    <p class="star-review">
+                                        @for (int n = 1; n <= Math.Ceiling(model.Ratings); n++)
+                                        {
+                                            <img src="~/Content/fonts/star.png" alt="star" class="img-fluid">
+                                        }
+
+                                        @for (int b = 1; b <= (5 - Math.Ceiling(model.Ratings)); b++)
+                                        {
+                                            <img src="~/Content/fonts/star-white.png" alt="star" class="img-fluid">
+                                        }
+                                        <br />
+                                       
+
+                                        <span class="review">@Html.DisplayFor(x => model.Comments)</span>
+                                    </p>
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <hr>
+
+                                </div>
+
+
+                            </div>
+                            }
+                        }
+
+
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title text-center" id="exampleModalLabel"><i class="fas fa-check-circle"></i><br>Thank You For Purchasing!</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><span>Dear Smit,</span></p>
+                    <p>Voluptate proident excepteur tempor incididunt commodo aute officia ullamco laboris mollit proident occaecat. Cupidatat ipsum dolore eu ipsum veniam proident nisi exercitation sunt fugiat dolore esse nulla consectetur. Voluptate veniam id est officia in elit. Ullamco officia eu aute ullamco adipisicing. Dolor sit sunt minim dolor aliqua Lorem.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <hr>
+
+        <div class="footer-flex">
+            <div class="text-left">
+
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+            <div class="  text-right footer-icon">
+                <a href="#" class="facebook"> <img src="~/Content/fonts/facebook.png" alt="facebook" class="img-fluid" /></a>
+
+                <a href="#" class="twitter"> <img src="~/Content/fonts/twitter.png" alt="twitter" class="img-fluid" /></a>
+                <a href="#" class="linkedin">  <img src="~/Content/fonts/linkedin.png" alt="linkedin" class="img-fluid" /></a>
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+
+
+</body>
+
+</html>

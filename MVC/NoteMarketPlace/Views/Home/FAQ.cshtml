@@ -25,21 +25,22 @@
     <section id="header">
         <div class="img-container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
-                <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
+                <a class="navbar-brand" href="#"><img src="~/Content/imges/logo.png" alt="logo" class="img-fluid"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link" })
-                           
+                            @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link " })
+
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Sell Your Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link" })
 
-                           
+                            @Html.ActionLink("Sell Your Notes Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+
                         </li>
+
                         <li class="nav-item">
                             @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
 
@@ -48,10 +49,60 @@
                             @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
 
                         </li>
-                        <li class="nav-item ">
-                            @Html.ActionLink("LogIn", "Login", "Account", new { area = "" }, new { @class = "nav-link nav-login text-center" })
 
-                        </li>
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+
+                            </li>
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        <img src="~/Content/imges/person_1.jpg" alt="profile pic"
+                                             class="img-fluid rounded-circle">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @Html.ActionLink("My Profile", "UserProfile", "Home", null, new { @class = "dropdown-item" })
+                                        @Html.ActionLink("My Download", "Download", "Home", null, new { @class = "dropdown-item" })
+                                        @Html.ActionLink("My Sold Note", "SoldNote", "Home", null, new { @class = "dropdown-item" })
+                                        @Html.ActionLink("My Rejected Note", "RejectedNote", "Home", null, new { @class = "dropdown-item" })
+
+                                        @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                            {
+                                                <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                            }
+                                        }
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                                    }
+                                }
+
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ">
+                                @Html.ActionLink("LogIn", "Login", "Account", new { area = "" }, new { @class = "nav-link nav-login text-center" })
+
+                            </li>
+                        }
 
                     </ul>
                 </div>

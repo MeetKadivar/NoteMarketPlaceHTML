@@ -11,7 +11,9 @@ namespace NoteMarketPlace
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class SellerNotesAttachement
     {
         public int ID { get; set; }
@@ -25,5 +27,7 @@ namespace NoteMarketPlace
         public bool IsActive { get; set; }
     
         public virtual SellerNote SellerNote { get; set; }
+       
+        public HttpPostedFileBase NoteFile { get; set; }
     }
 }
