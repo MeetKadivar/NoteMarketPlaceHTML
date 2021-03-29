@@ -106,6 +106,14 @@ namespace NoteMarketPlace.Controllers
             var v = dc.Users.Where(a => a.Email == userId).FirstOrDefault();
             var sellerID = v.ID;
             var res = dc.SellerNotes.Where(a => a.SellerID == sellerID).ToList();
+
+           ViewBag.TotalDownload = dc.Downloads.Where(a => (a.Seller == sellerID) && (a.IsSellerHasAllowedDownload == true)).Count();
+           ViewBag.TotalMoney = dc.Downloads.Where(a => (a.Seller == sellerID) && (a.IsSellerHasAllowedDownload == true)).Sum(a => a.PurchasedPrice);
+            ViewBag.TotalUserDownload = dc.Downloads.Where(a => a.Downloader == sellerID).Count();
+            ViewBag.TotalRejected = dc.SellerNotes.Where(a => (a.SellerID == sellerID) && (a.Status == 10)).Count();
+            ViewBag.TotalBuyerRequest = dc.Downloads.Where(a => (a.Seller == sellerID) && (a.IsSellerHasAllowedDownload == false)).Count();
+            
+
             return View(res);
         }
         

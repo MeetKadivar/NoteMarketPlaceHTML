@@ -55,6 +55,10 @@
             text-align:center !important;
         }
 
+        .link-btn a{
+            color:white
+        }
+
 
     </style>
     <title>Dashbord</title>
@@ -80,7 +84,7 @@
                     </li>
                     <li class="nav-item">
 
-                        @Html.ActionLink("Sell Your Notes Note", "SellNote", "Home", new { area = "" }, new { @class = "nav-link list-link " })
+                        @Html.ActionLink("Sell Your Notes Note", "DashBoard", "Home", new { area = "" }, new { @class = "nav-link list-link " })
 
                     </li>
                     <li class="nav-item">
@@ -89,7 +93,7 @@
                     </li>
 
                     <li class="nav-item">
-                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
+                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link" })
 
                     </li>
                     <li class="nav-item">
@@ -152,7 +156,9 @@
                     <h4 class="dashboard-title">Dashboard</h4>
                 </div>
                 <div class="col-md-6 text-right">
-                    <button class="btn">ADD NOTES</button>
+                    <button class="btn link-btn">
+                        @Html.ActionLink("Add Note", "SellNote", "Home")
+                    </button>
                 </div>
 
             </div>
@@ -170,14 +176,14 @@
                             </div>
                             <div class="col-md-4 text-center">
                                 <div class="box-content">
-                                    <span>100</span>
+                                    <span>@ViewBag.TotalDownload</span>
                                     <p>Number Of Note Sold</p>
                                 </div>
 
                             </div>
                             <div class="col-md-4 text-center">
                                 <div class="box-content">
-                                    <span>$10,000</span>
+                                    <span>$@ViewBag.TotalMoney</span>
                                     <p>Money Earned</p>
                                 </div>
 
@@ -191,15 +197,15 @@
                 <div class="col-md-6 second-row">
                     <div class="row">
                         <div class="col-md-4 right-inner-box text-center">
-                            <span>38</span>
+                            <span>@ViewBag.TotalUserDownload</span>
                             <p>My Download</p>
                         </div>
                         <div class="col-md-4 right-inner-box text-center">
-                            <span>12</span>
+                            <span>@ViewBag.TotalRejected</span>
                             <p>My rejected Notes</p>
                         </div>
                         <div class="col-md-4 right-inner-box text-center">
-                            <span>102</span>
+                            <span>@ViewBag.TotalBuyerRequest</span>
                             <p>Buyer Request</p>
 
                         </div>
