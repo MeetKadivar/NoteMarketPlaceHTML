@@ -19,3 +19,8 @@ SetRatingStar();
 $(document).ready(function() {
 
 });
+
+//$(".ratingstar").click(function () {
+//    var starvalue = $(this).attr("ratingstar");
+//    $(".rating-value").val(starvalue);
+//});

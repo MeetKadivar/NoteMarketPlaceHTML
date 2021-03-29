@@ -808,5 +808,50 @@ namespace NoteMarketPlace.Controllers
             return RedirectToAction("BuyerRequest");
             
         }
+      
+        public ActionResult AddReview(int id,string cmt,int rating)
+        {
+            string userId = User.Identity.Name;
+            var v = dc.Users.Where(a => a.Email == userId).FirstOrDefault();
+            var downloader = v.ID;
+            var vs = dc.Downloads.Where(a => (a.NoteID == id) && (a.Downloader == downloader)).FirstOrDefault();
+            var downloadid = vs.ID;
+            SellerNotesReview re = new SellerNotesReview()
+            {
+                NoteID = id,
+                Comments = cmt,
+                ReviewedByID = downloader,
+                AgainstDownloadsID = downloadid,
+                Ratings = rating,
+                CreatedDate = DateTime.Now,
+                CreatedBy =downloader,
+                IsActive = true
+            };
+            dc.SellerNotesReviews.Add(re);
+            dc.SaveChanges();
+            return RedirectToAction("Download");
+        }
+
+        public ActionResult AddIssue(int id,int noteid)
+        {
+
+            string userId = User.Identity.Name;
+            var v = dc.Users.Where(a => a.Email == userId).FirstOrDefault();
+            var downloader = v.ID;
+            SellerNotesReportedIssue issue = new SellerNotesReportedIssue()
+            {
+                NoteID=noteid,
+                ReportedByID=downloader,
+                AgainstDownloadID=id,
+                Remarks="issue",
+                CreatedDate=DateTime.Now,
+                CreatedBy = downloader
+            };
+            dc.SellerNotesReportedIssues.Add(issue);
+            dc.SaveChanges();
+            return RedirectToAction("Download");
+        }
+
+
     }
 }

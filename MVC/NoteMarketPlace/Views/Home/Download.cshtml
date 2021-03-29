@@ -81,7 +81,7 @@
                     </li>
 
                     <li class="nav-item">
-                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
+                        @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link " })
 
                     </li>
                     <li class="nav-item">
@@ -185,6 +185,8 @@
                         <tbody>
                             @{
                                 int i = 1;
+                                int j = 1;
+
                                 foreach (var item in Model)
                                 {
                                     if (item.IsSellerHasAllowedDownload == true)
@@ -211,13 +213,14 @@
                                             <td>
 
                                                 <div class="dropdown_1">
+                                                    <input type="hidden" data-value="@item.NoteID" />
                                                     <button class="dropbtn_1"><img src="~/Content/fonts/dots.png" alt="dot"></button>
                                                     <div class="dropdown-content_1">
-                                                        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                                                        <button type="button" class="btn review-btn" data-toggle="modal" data-target="#exampleModal@(j)">
                                                             Add Review/FeedBack
                                                         </button>
-                                                       
-                                                        <a href="#">Report as inappropriate</a>
+                                                        <a href="@Url.Action("AddIssue","Home",new {id = item.ID ,noteid = item.NoteID})">
+                                                            Report as inappropriate</a>
 
 
 
@@ -227,6 +230,60 @@
 
                                             </td>
                                         </tr>
+                                    
+
+
+
+                                    <div class="modal fade" id="exampleModal@(j)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel@(j)" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-btn">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <input type="hidden" id="noteid@(j)" name=@item.NoteID />
+                                                                <div class="col-lg-12">
+                                                                    <div class="star-rating">
+                                                                        <span class="fa fa-star-o ratingstar" data-rating="1"></span>
+                                                                        <span class="fa fa-star-o ratingstar" data-rating="2"></span>
+                                                                        <span class="fa fa-star-o ratingstar" data-rating="3"></span>
+                                                                        <span class="fa fa-star-o ratingstar" data-rating="4"></span>
+                                                                        <span class="fa fa-star-o ratingstar" data-rating="5"></span>
+                                                                        <input type="hidden" name="whatever1" class="rating-value">
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-12">
+                                                                    <label for="comment">Comment*</label>
+                                                                    <textarea class="form-control" id="comment@(j)" rows="3"></textarea>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  
+
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="rating-button" data-filed="@(j++)" onclick="myf(this)">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     }
                                 }
                             }
@@ -243,73 +300,9 @@
         </div>
     </section>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal content -->
-    @*<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title " id="exampleModalLongTitle">Add Review</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="star-rating">
-                                            <span class="fa fa-star-o" data-rating="1"></span>
-                                            <span class="fa fa-star-o" data-rating="2"></span>
-                                            <span class="fa fa-star-o" data-rating="3"></span>
-                                            <span class="fa fa-star-o" data-rating="4"></span>
-                                            <span class="fa fa-star-o" data-rating="5"></span>
-                                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
-                                        </div>
-                                    </div>
-                                </div>
+   
 
 
-                            </div>
-                            <div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="comment">Comment*</label>
-                                        <textarea class="form-control" id="comment" rows="3"></textarea>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer text-left">
-
-                        <button type="button" class="btn ">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>*@
     <footer>
         <hr>
 
@@ -366,7 +359,27 @@
 
     <script src="~/Scripts/main.js"></script>
     <script src="~/Scripts/review.js"></script>
+   
+    <script>
+        $(".ratingstar").click(function () {
+            console.log("star");
+            var starvalue = $(this).attr("data-rating");
+            $(".rating-value").val(starvalue);
 
+        });
+        
+        function myf(e) {
+            var v = $(e).attr("data-filed");
+            
+            var id = "noteid" + v;
+            
+            var fin = $('#' + id).attr("name");
+            var cmt = $("#comment"+v).val();
+            console.log(cmt);
+            var rating = $(".rating-value").val();
+            window.location.href = "/Home/AddReview?id=" + fin + "&cmt=" + cmt + "&rating=" + rating;
+        }
+    </script>
 
 
 </body>

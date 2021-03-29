@@ -207,13 +207,16 @@
 
 
                                         <td>@Html.DisplayFor(model => item.AttachmentDownloadedDate)</td>
-                                        <td><img src="~/Content/fonts/eye.png" alt="eye" class="img-eye"></td>
+                                        <td>
+                                            <a href="@Url.Action("NoteDetails","Home",new {id = item.NoteID })"><img src="~/Content/fonts/eye.png" alt="eye" class="img-fluid img-eye"></a>
+                                        </td>
                                         <td>
 
                                             <div class="dropdown_1">
                                                 <button class="dropbtn_1"><img src="~/Content/fonts/dots.png" alt="dot"></button>
                                                 <div class="dropdown-content_1">
-                                                    <a href="#">Download</a>
+                                                    @Html.ActionLink("Download", "DownloadFile", "Home", new { id = item.NoteID }, null)
+                                                
 
 
 
