@@ -54,7 +54,8 @@ namespace NoteMarketPlace.Controllers
                             dc.Users.Add(user);
 
                             dc.SaveChanges();
-                           
+
+                            ModelState.Clear();
 
                         }
                         catch (Exception e)
@@ -123,7 +124,7 @@ namespace NoteMarketPlace.Controllers
             string message = "";
             using(NoteMarketPlaceEntities dc = new NoteMarketPlaceEntities())
             {
-                var v = dc.Users.Where(a => a.Email == login.Email).FirstOrDefault();
+                var v = dc.Users.Where(a => (a.Email == login.Email) && (a.IsActive == true) &&(a.IsEmailVerify == true)).FirstOrDefault();
                 if( v != null)
                 {
                     if (string.Compare(login.Password,v.Password) == 0)
@@ -143,7 +144,15 @@ namespace NoteMarketPlace.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("DashBoard", "Home");
+                            if(v.RoleID == 2 || v.RoleID == 3)
+                            {
+                                return RedirectToAction("AdminDashBoard", "Home");
+                            }
+                            else
+                            {
+                                return RedirectToAction("DashBoard", "Home");
+                            }
+                            
                         }
                     }
                     else
@@ -154,7 +163,7 @@ namespace NoteMarketPlace.Controllers
                 }
                 else
                 {
-                    message = "Invalid credential provider";
+                    message = "Invalid credential provider or Email is not verify";
                 }
             }
             ViewBag.Message = message;
@@ -187,7 +196,7 @@ namespace NoteMarketPlace.Controllers
 
             var fromEmail = new MailAddress("meetkadivar88@gmail.com", "Meet");
             var toEmail = new MailAddress(email);
-            var fromEmailPassword = "******"; //Password
+            var fromEmailPassword = "123@Meet"; //Password
             string subject = "";
             string body = "";
 
@@ -197,7 +206,7 @@ namespace NoteMarketPlace.Controllers
                  subject = "Your Account is successfully Created!";
 
                 body ="<table style='margin - top:30px; margin - left:30px;'>" + 
-                 "<tr>  <th scope = 'col' ><img src = '~/Content/imges/logo.png' alt = 'logo' ></th> </tr >"+
+                
                  "<tr>  <td ><p  style=' font - family: sans - serif;font - size: 26px ;font - weight: 600;line - height: 30px; color: #6255a5; margin - bottom:30px;'>Email Verification</p></td></tr >" +
                  "<tr><td><p  style=' font-family: sans-serif;font-size: 18px; font-weight: 600;line-height: 22px;color: #333333;margin-bottom:20px ;'> Dear "+email+"</p></td></tr>" +
                  "<tr><td><p  style ='font-family: sans-serif; font-size: 16px;font-weight: 400;line-height: 20px;color: #333333;'>Thanks for Signing up!</p><p style ='font-family: sans-serif; font-size: 16px;font-weight: 400;line-height: 20px;color: #333333;'>Simply click below for email verification</p></td></tr>" +
@@ -207,7 +216,7 @@ namespace NoteMarketPlace.Controllers
 
                    
 
-    }
+            }
 
             else if (emailfor == "ResetPassword")
             {
@@ -223,7 +232,7 @@ namespace NoteMarketPlace.Controllers
                 Port = 587,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials =false,
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromEmail.Address,fromEmailPassword)
 
             
@@ -234,8 +243,10 @@ namespace NoteMarketPlace.Controllers
                 Body = body,
                 IsBodyHtml = true
             })
-
-                smtp.Send(Message);
+                
+            smtp.Send(Message);
+            ModelState.Clear();
+            
         }
         [HttpGet]
 
@@ -266,7 +277,8 @@ namespace NoteMarketPlace.Controllers
                     account.Password = resetCode;
                     dc.Configuration.ValidateOnSaveEnabled = false;
                     dc.SaveChanges();
-                    message = "Reset password link has been sent to your email id";
+                    ModelState.Clear();
+                    message = "Your New password  has been sent to your email id";
 
                 }
                 else

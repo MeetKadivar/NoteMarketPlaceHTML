@@ -33,93 +33,110 @@
 <body>
 
     <section id="header">
-        <div class="img-container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
-                <a class="navbar-brand" href="#"><img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" /></a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item ">
-                            @Html.ActionLink("Search Note", "NoteListing", "Note", new { area = "" }, new { @class = "nav-link list-link " })
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="/Home/Index">
+                <img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        @Html.ActionLink("DashBoard", "AdminDashBoard", "Home", null, new { @class = "nav-link " })
 
-                        </li>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                Notes
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Notes Under Review", "NoteUnderReview", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Published Notes", "AdminPublishedNote", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Downloaded Notes", "AdminDownload", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Rejected Notes", "AdminRejectedNote", "Home", null, new { @class = "dropdown-item " })
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Members", "AdminMember", "Home", null, new { @class = "nav-link " })
+
+
+                    </li>
+
+
+                    @if (ViewBag.Role == 3)
+                    {
                         <li class="nav-item">
 
-                            @Html.ActionLink("Sell Your Notes Note", "DashBoard", "Home", new { area = "" }, new { @class = "nav-link list-link " })
-
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link" })
-
-                        </li>
-
-                        <li class="nav-item">
-                            @Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "nav-link list-link " })
-
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "nav-link list-link" })
-
-                        </li>
-                        <li class="nav-item">
                             <div class="dropdown">
-                                <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                <button class="btn  dropdown-toggle nav-link " type="button"
                                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                    <img src="~/Content/imges/person_1.jpg" alt="profile pic"
-                                         class="img-fluid rounded-circle">
+                                    Setting
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @Html.ActionLink("My Profile", "UserProfile", "Home", null, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("My Download", "Download", "Home", null, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("My Sold Note", "SoldNote", "Home", null, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("My Rejected Note", "RejectedNote", "Home", null, new { @class = "dropdown-item" })
-
-                                    @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
-
-                                    @if (Request.IsAuthenticated)
-                                    {
-                                        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                        {
-                                            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
-                                        }
-                                    }
+                                    @Html.ActionLink("Manage System Configuration", "ManageSystemConfi", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Administrator", "ManageAdmin", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Category", "ManageCategory", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Type", "ManageType", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Countries", "ManageCountry", "Home", null, new { @class = "dropdown-item " })
 
                                 </div>
                             </div>
+
                         </li>
-                        <li class="nav-item ">
-                            @if (Request.IsAuthenticated)
-                            {
-                                using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+
+
+                    }
+
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <img src="~/Images/Admin/@ViewBag.ProfileUrl" alt="profile pic"
+                                     class="img-fluid rounded-circle">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Update Profile", "AdminUpdateProfile", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+                                @if (Request.IsAuthenticated)
                                 {
-                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                    }
                                 }
-                            }
 
 
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="user-heading text-center">
-                            <h3>Sell Notes</h3>
+                            </div>
                         </div>
+                    </li>
+                    <li class="nav-item ">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                            }
+                        }
 
 
-                    </div>
-
-                </div>
-
+                    </li>
+                </ul>
             </div>
+        </nav>
 
-        </div>
+
+
 
     </section>
     <section id="user_form">

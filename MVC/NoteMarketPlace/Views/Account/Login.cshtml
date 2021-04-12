@@ -42,6 +42,7 @@
                                     <div class="form-group col-md-12 text-center">
                                         <h4 class="title">LogIn</h4>
                                         <p class="content-p">Enter your email address and password to login</p>
+                                        <span class="text-danger">@ViewBag.Message </span>
                                     </div>
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="form-group col-md-12 ">

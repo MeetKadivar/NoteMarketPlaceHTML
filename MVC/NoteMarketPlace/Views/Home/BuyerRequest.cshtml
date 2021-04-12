@@ -29,7 +29,7 @@
     <section id="header">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/Home/Index">
 
                 <img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" />
             </a>
@@ -49,7 +49,7 @@
 
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link" })
+                        @Html.ActionLink("Buyer Request", "BuyerRequest", "Home", new { area = "" }, new { @class = "nav-link list-link active-link" })
 
                     </li>
                     <li class="nav-item">
@@ -65,7 +65,7 @@
                             <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                <img src="~/Content/imges/person_1.jpg" alt="profile pic"
+                                <img src="~/Images/Member/@ViewBag.ProfileUrl" alt="profile pic"
                                      class="img-fluid rounded-circle">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -127,7 +127,7 @@
                                 </span>
                             </div>
                             @Html.TextBox("serachText", null,new { @class= "form-control my-0 py-1 custom-input", @placeholder = "Search" })
-                            @*<input class="form-control my-0 py-1 custom-input" type="text" placeholder="Search" aria-label="Search" >*@
+                          
                             <button class="btn ser_btn" type="submit">SEARCH</button>
                         </div>
 
@@ -148,31 +148,31 @@
                             <tr>
                                 <th scope="col">SR. NO.</th>
                                 <th scope="col">
-                                  
-                                    @Html.ActionLink("NOTETITLE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "NoteTitle",PageNumber = ViewBag.PageNumber == 0 ?1 : ViewBag.PageNumber }, new { @class = "note-title" })
+
+                                    @Html.ActionLink("NOTETITLE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "NoteTitle", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
                                 </th>
                                 <th scope="col">
                                     @Html.ActionLink("CATAGORY", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
 
 
-                                    
+
                                 </th>
 
                                 <th scope="col">
                                     @Html.ActionLink("BUYER", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Buyer", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
-                                    
+
                                 </th>
 
                                 <th scope="col">SELLTYPE</th>
                                 <th scope="col">
-                                    @Html.ActionLink("PRICE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price" , PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                    @Html.ActionLink("PRICE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
 
-                                    
+
                                 </th>
                                 <th scope="col">
-                                    @Html.ActionLink("DOWNLOADED\n DATE/TIME", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "DownDate" , PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                    @Html.ActionLink("DOWNLOADED\n DATE/TIME", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "DownDate", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
 
-                                   
+
                                 </th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
@@ -180,7 +180,7 @@
                         </thead>
                         <tbody>
 
-                           
+
                             @{
                                 int i = 1;
                                 foreach (var item in Model)
@@ -189,90 +189,90 @@
                                     if (item.IsSellerHasAllowedDownload == false)
                                     {
 
-                                    
-                                    <tr>
-                                        <td>
 
-                                              @(i++)
-                                               
+                                        <tr>
+                                            <td>
 
-
-
-
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.NoteTitle)
-                                           
-
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.NoteCategory)
-                                           
-                                        </td>
-                                        <td>
-
-
-
-                                            @Html.DisplayFor(modelItem => item.User1.Email)
+                                                @(i++)
 
 
 
 
-                                        </td>
-                                        @if (item.IsPaid == true)
+
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NoteTitle)
+
+
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NoteCategory)
+
+                                            </td>
+                                            <td>
+
+
+
+                                                @Html.DisplayFor(modelItem => item.User1.Email)
+
+
+
+
+                                            </td>
+                                            @if (item.IsPaid == true)
                                             {
-                                            <td> Paid</td>
-                                        }
-                                        else
-                                        {
-                                            <td> Free </td>
-
-                                        }
-
-
-                                        @if (item.IsPaid == true)
+                                                <td> Paid</td>
+                                            }
+                                            else
                                             {
-                                            <td>  @Html.DisplayFor(modelItem => item.PurchasedPrice)</td>
-                                        }
-                                        else
-                                        {
-                                            <td> Free </td>
+                                                <td> Free </td>
 
-                                        }
+                                            }
 
-                                        @if (item.AttachmentDownloadedDate == null)
+
+                                            @if (item.IsPaid == true)
                                             {
-                                            <td>Not Recorded</td>
-                                        }
-                                        else
-                                        {
+                                                <td>  @Html.DisplayFor(modelItem => item.PurchasedPrice)</td>
+                                            }
+                                            else
+                                            {
+                                                <td> Free </td>
 
+                                            }
+
+                                            @if (item.AttachmentDownloadedDate == null)
+                                            {
+                                                <td>Not Recorded</td>
+                                            }
+                                            else
+                                            {
+
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AttachmentDownloadedDate)
+                                                </td>
+
+                                            }
+                                            <td><img src="~/Content/fonts/eye.png" alt="eye" class="img-eye" /></td>
 
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.AttachmentDownloadedDate)
-                                            </td>
 
-                                        }
-                                        <td><img src="~/Content/fonts/eye.png" alt="eye" class="img-eye" /></td>
+                                                <div class="dropdown_1">
+                                                    <button class="dropbtn_1">
 
-                                        <td>
+                                                        <img src="~/Content/fonts/dots.png" alt="dot" />
+                                                    </button>
+                                                    <div class="dropdown-content_1">
 
-                                            <div class="dropdown_1">
-                                                <button class="dropbtn_1">
-
-                                                    <img src="~/Content/fonts/dots.png" alt="dot" />
-                                                </button>
-                                                <div class="dropdown-content_1">
-
-                                                    <a href="@Url.Action("AllowDownload","Home",new { id = item.NoteID,downloader = item.Downloader})">Allow Download</a>
+                                                        <a href="@Url.Action("AllowDownload","Home",new { id = item.NoteID,downloader = item.Downloader})">Allow Download</a>
 
 
 
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     }
                                 }
                             }
@@ -286,8 +286,11 @@
                 </div>
 
             </div>
-           
 
+            @if (ViewBag.Result == "Not")
+            {
+                <h4>No Data Available</h4>
+            }
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="pagination">

@@ -1,0 +1,310 @@
+﻿@model IEnumerable<NoteMarketPlace.Country>
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="~/Content/header.css" rel="stylesheet" />
+    <link href="~/Content/footer_fixed.css" rel="stylesheet" />
+    <link href="~/Content/admin_manageAdmin.css" rel="stylesheet" />
+    <style>
+        a.paginate_button {
+            color: #000000 !important;
+            font-family: "Open Sans",sans-serif;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            border: none !important;
+            margin: 10px;
+        }
+
+
+        .tr-order:hover {
+            cursor: pointer;
+        }
+
+        a.paginate_button.current {
+            color: #fff !important;
+            background: #6255a5 !important;
+            font-family: "Open Sans",sans-serif;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            border-radius: 50% !important;
+            padding: 5px;
+        }
+
+        a.paginate_button:hover {
+            background: none !important;
+            cursor: pointer;
+        }
+
+        a.paginate_button.current :hover {
+            background: #6255a5 !important;
+        }
+
+        #myTable_paginate {
+            text-align: center !important;
+        }
+    </style>
+    <title>Manage Country</title>
+</head>
+<body>
+    <section id="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="/Home/Index">
+                <img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        @Html.ActionLink("DashBoard", "AdminDashBoard", "Home", null, new { @class = "nav-link " })
+
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                Notes
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Notes Under Review", "NoteUnderReview", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Published Notes", "AdminPublishedNote", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Downloaded Notes", "AdminDownload", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Rejected Notes", "AdminRejectedNote", "Home", null, new { @class = "dropdown-item " })
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Members", "AdminMember", "Home", null, new { @class = "nav-link " })
+
+
+                    </li>
+
+
+                    @if (ViewBag.Role == 3)
+                    {
+                        <li class="nav-item">
+
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle nav-link " type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Setting
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @Html.ActionLink("Manage System Configuration", "ManageSystemConfi", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Administrator", "ManageAdmin", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Category", "ManageCategory", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Type", "ManageType", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Countries", "ManageCountry", "Home", null, new { @class = "dropdown-item " })
+
+                                </div>
+                            </div>
+
+                        </li>
+
+
+                    }
+
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <img src="~/Images/Admin/@ViewBag.ProfileUrl" alt="profile pic"
+                                     class="img-fluid rounded-circle">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Update Profile", "AdminUpdateProfile", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                            }
+                        }
+
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+    </section>
+
+    <section id="manage-admin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title">Manage Category</h3>
+
+                </div>
+                <div class="col-md-6 text-left">
+                    <a href="@Url.Action("AddCountry", "Home",null,null)"> <button class="btn btn-sec">ADD COUNTRY</button></a>
+                </div>
+                <div class="col-md-6 text-right">
+                    <form>
+                        <div class="input-group md-form form-sm form-1 pl-0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text purple lighten-3" id="basic-text1">
+
+                                    <img src="~/Content/fonts/search-icon.png" alt="serach" aria-hidden="true">
+                                </span>
+                            </div>
+                            <input class="form-control my-0 py-1 custom-input" id="myCustomSearchBox" type="text" placeholder="Search" aria-label="Search">
+                            <button class="btn custom-btn btn-sec">SEARCH</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="admin-table">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">SR. NO.</th>
+                                    <th scope="col">CATEGORY</th>
+                                    <th scope="col">COUNTRY CODE</th>
+                                    <th scope="col">DATE ADDED</th>
+
+
+
+
+                                    <th scope="col">ACTIVE</th>
+                                    <th scope="col">ACTION</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 1;
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>@(i++)</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.CountryCode</td>
+                                            <td>@item.CreatedDate</td>
+                                            @if (item.IsActive == true)
+                                            {
+                                                <td>Yes</td>
+                                            }
+                                            else
+                                            {
+                                                <td>No</td>
+                                            }
+
+                                            <td class="two-icon"><a href="@Url.Action("EditCountry", "Home",new { id =item.ID})"><img src="~/Content/fonts/edit.png" alt="edit" class="img-fluid"></a><a href="@Url.Action("DeleteCountry", "Home",new { id =item.ID})" onclick="return confirm('Are you sure you want to make this country inactive?')"><img src="~/Content/fonts/delete.png" alt="delete"></a></td>
+                                        </tr>
+                                    }
+                                }
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <footer>
+        <hr>
+
+        <div class="footer-flex">
+            <div class="text-left">
+                <p>version : 1.1.24</p>
+
+            </div>
+            <div class="  text-right footer-icon">
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        dTable = $('#myTable').DataTable({
+
+            "language": {
+                "paginate": {
+                    "next": '<span>&raquo;</span>',
+                    "previous": '<span>&laquo;</span>'
+                }
+            },
+
+
+            "bLengthChange": false, // this gives option for changing the number of records shown in the UI table
+            "lengthMenu": [5], // 5 records will be shown in the table
+
+            "dom": "lrtip", //to hide default searchbox but search feature is not disabled hence customised searchbox can be made.
+            "pagingType": "simple_numbers"
+
+        });
+        $('#myCustomSearchBox').keyup(function () {
+            dTable.search($(this).val()).draw(); // this  is for customized searchbox with datatable search feature.
+        })
+
+        $(".dataTables_info").hide();
+
+
+    </script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

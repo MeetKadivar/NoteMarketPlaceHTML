@@ -157,9 +157,14 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AddNote.cs" />
+    <Compile Include="Models\MemberDetails.cs" />
     <Compile Include="Models\NoteDetails.cs" />
     <Compile Include="Models\NoteListing.cs" />
     <Compile Include="Models\ResetPassword.cs" />
+    <Compile Include="Models\TotalDownload.cs" />
+    <Compile Include="Models\TotalMoney.cs" />
+    <Compile Include="Models\TotalPublish.cs" />
+    <Compile Include="Models\TotalUnderReview.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="NoteCategory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -273,6 +278,9 @@
     <Content Include="Content\imges\person_3.jpg" />
     <Content Include="Content\imges\person_4.jpg" />
     <Content Include="Content\imges\top-logo.png" />
+    <Content Include="Images\Admin\person_1.jpg" />
+    <Content Include="Images\Admin\person_1210315046.jpg" />
+    <Content Include="Images\Member\person_1.jpg" />
     <Content Include="Images\Member\person_1211128245.jpg" />
     <Content Include="Images\Member\person_1211627550.jpg" />
     <Content Include="Images\Member\person_2210324215.jpg" />
@@ -296,6 +304,12 @@
     <Content Include="Images\Notes\book_6211728628.jpg" />
     <Content Include="Images\Notes\full_book.jpg" />
     <Content Include="Images\Notes\full_book214413141.jpg" />
+    <Content Include="Images\Notes\service_02215144023.jpg" />
+    <Content Include="Images\Notes\service_02215235728.jpg" />
+    <Content Include="Images\Notes\service_02215305266.jpg" />
+    <Content Include="Images\Notes\service_03210823702.jpg" />
+    <Content Include="Images\Notes\service_04214617120.jpg" />
+    <Content Include="Images\Notes\service_04215016634.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -368,9 +382,32 @@
     <Content Include="Views\Home\RejectedNote.cshtml" />
     <Content Include="Views\Home\NoteDetails.cshtml" />
     <Content Include="Views\Home\EditNote.cshtml" />
+    <Content Include="Views\Home\AdminDashBoard.cshtml" />
+    <Content Include="Views\Home\NoteUnderReview.cshtml" />
+    <Content Include="Views\Home\AdminDownload.cshtml" />
+    <Content Include="Views\Home\AdminPublishedNote.cshtml" />
+    <Content Include="Views\Home\AdminRejectedNote.cshtml" />
+    <Content Include="Views\Home\AdminMember.cshtml" />
+    <Content Include="Views\Home\AdminMemberDetails.cshtml" />
+    <Content Include="Views\Home\ManageAdmin.cshtml" />
+    <Content Include="Views\Home\AdminUpdateProfile.cshtml" />
+    <Content Include="Views\Home\AddAdmin.cshtml" />
+    <Content Include="Views\Home\EditAdmin.cshtml" />
+    <Content Include="Views\Home\ManageCategory.cshtml" />
+    <Content Include="Views\Home\EditCategory.cshtml" />
+    <Content Include="Views\Home\AddCategory.cshtml" />
+    <Content Include="Views\Home\ManageType.cshtml" />
+    <Content Include="Views\Home\EditType.cshtml" />
+    <Content Include="Views\Home\AddType.cshtml" />
+    <Content Include="Views\Home\ManageCountry.cshtml" />
+    <Content Include="Views\Home\EditCountry.cshtml" />
+    <Content Include="Views\Home\AddCountry.cshtml" />
+    <Content Include="Views\Home\ManageSystemConfi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Default\Member\" />
+    <Folder Include="Images\Default\Note\" />
     <Folder Include="NotePdf\Preview\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,433 @@
+﻿@model NoteMarketPlace.Models.MemberDetails
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="~/Content/footer.css" rel="stylesheet" />
+    <link href="~/Content/header.css" rel="stylesheet" />
+    <link href="~/Content/admin_member.css" rel="stylesheet" />
+    <link href="~/Content/review.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <style>
+        a.paginate_button {
+            color: #000000 !important;
+            font-family: "Open Sans",sans-serif;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+           border: none !important;
+            margin:10px;
+        }
+
+
+        .tr-order:hover {
+            cursor: pointer;
+        }
+            a.paginate_button.current {
+                color: #fff !important;
+                background: #6255a5 !important;
+                font-family: "Open Sans",sans-serif;
+                font-weight: 400 !important;
+                font-size: 14px !important;
+                border-radius: 50% !important;
+               
+                padding:5px;
+            }
+
+            a.paginate_button:hover {
+                background: none !important;
+                cursor:pointer;
+            }
+
+            a.paginate_button.current :hover {
+                background: #6255a5 !important;
+            }
+
+        #myTable_paginate {
+            text-align: center !important;
+        }
+
+
+    </style>
+    <title>Member Deatails</title>
+
+</head>
+
+<body>
+    <section id="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="/Home/Index">
+                <img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        @Html.ActionLink("DashBoard", "AdminDashBoard", "Home", null, new { @class = "nav-link " })
+
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                Notes
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Notes Under Review", "NoteUnderReview", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Published Notes", "AdminPublishedNote", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Downloaded Notes", "AdminDownload", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Rejected Notes", "AdminRejectedNote", "Home", null, new { @class = "dropdown-item " })
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Members", "AdminMember", "Home", null, new { @class = "nav-link " })
+
+
+                    </li>
+
+
+                    @if (ViewBag.Role == 3)
+                    {
+                        <li class="nav-item">
+
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle nav-link " type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Setting
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @Html.ActionLink("Manage System Configuration", "ManageSystemConfi", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Administrator", "ManageAdmin", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Category", "ManageCategory", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Type", "ManageType", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Countries", "ManageCountry", "Home", null, new { @class = "dropdown-item " })
+
+                                </div>
+                            </div>
+
+                        </li>
+
+
+                    }
+
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <img src="~/Images/Admin/@ViewBag.ProfileUrl" alt="profile pic"
+                                     class="img-fluid rounded-circle">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Update Profile", "AdminUpdateProfile", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                            }
+                        }
+
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+    </section>
+
+    <section id="member">
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="title">Member Deatils</h4>
+
+                </div>
+                <div class="col-md-2">
+                    <div class="member-img">
+                        <img src="~/Images/Member/@Model.up.ProfilePicture" alt="member" class="img-fluid">
+
+                    </div>
+
+                </div>
+                <div class="col-md-5 box">
+                    <div class="row">
+                        <div class="col-md-12 box-flex ">
+                            <span>First Name:</span> <span class="pur-text">@Html.DisplayFor(a => a.up.User.FirstName)</span>
+
+
+
+
+
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>Last Name:</span><span class="pur-text">@Html.DisplayFor(a => a.up.User.LastName)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>Email:</span> <span class="pur-text">@Html.DisplayFor(a => a.up.User.Email)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>DOB:</span><span class="pur-text">@Html.DisplayFor(a => a.up.DOB)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>Phone Number:</span><span class="pur-text">@Html.DisplayFor(a => a.up.PhoneNumber)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+
+                            <span>College/University:</span>
+                            <span class="pur-text">@Html.DisplayFor(a => a.up.University)</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-5">
+
+                    <div class="row">
+
+                        <div class="col-md-12 box-flex">
+                            <span>Address 1:</span><span class="pur-text">@Html.DisplayFor(a => a.up.AddressLine1)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>Address 2:</span><span class="pur-text">@Html.DisplayFor(a => a.up.AddressLine2)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>City:</span><span class="pur-text">@Html.DisplayFor(a => a.up.City)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>State:</span><span class="pur-text">@Html.DisplayFor(a => a.up.State)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>Country:</span><span class="pur-text">@Html.DisplayFor(a => a.up.Country)</span>
+                        </div>
+                        <div class="col-md-12 box-flex">
+                            <span>Zip Code:</span><span class="pur-text">@Html.DisplayFor(a => a.up.ZipCode)</span>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <hr>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="manage-admin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title-sm">Notes</h3>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div class="admin-table">
+            <div class="container">
+                <div class="row table-row-scroll">
+                    <div class="col-md-12">
+                        <table class="table table-hover" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="tr-order">SR. NO.</th>
+                                    <th scope="col" class="tr-order">NOTE TITLE</th>
+                                    <th scope="col" class="tr-order">CATEGORY</th>
+                                    <th scope="col" class="tr-order text-center">STATUS</th>
+                                    <th scope="col" class="tr-order text-center">DOWNLOADED NOTES </th>
+
+
+                                    <th scope="col" class="tr-order text-center">TOTAL EARNINGS</th>
+                                    <th scope="col" class="tr-order">DATE ADDED</th>
+                                    <th scope="col" class="tr-order">PUBLISHED DATE</th>
+                                    <th scope="col"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 1;
+                                    foreach (var item in Model.note)
+                                    {
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td class="pur-text">@item.Title</td>
+                                            <td>@item.NoteCategory.Name</td>
+                                            <td class="text-center">@item.ReferenceData.Value</td>
+                                            @if (item.Status != 9)
+                                            {
+                                                <td class="text-center">0</td>
+                                                <td class="text-center">$0</td>
+                                            }
+                                            else
+                                            {
+                                                int j = 0;
+                                                foreach (var itemlist in ViewBag.TotalDownload)
+                                                {
+                                                    if (itemlist.Note == item.ID)
+                                                    {
+                                                        if (itemlist.Count != 0)
+                                                        {
+                                                            <td class="text-center" data-value="@(j++)">@itemlist.Count</td>
+
+                                                        }
+
+                                                    }
+                                                }
+                                                if (j == 0)
+                                                {
+                                                    <td class="text-center">0</td>
+
+                                                }
+                                                int k = 0;
+
+                                                foreach (var itemlist2 in ViewBag.TotalMoney)
+                                                {
+                                                    if (itemlist2.id == item.ID)
+                                                    {
+                                                        if (itemlist2.Money != 0)
+                                                        {
+                                                            <td class="text-center" data-value="@(k++)">$@itemlist2.Money</td>
+
+                                                        }
+
+                                                    }
+                                                }
+                                                if (k == 0)
+                                                {
+                                                    <td class="text-center">$0</td>
+
+                                                }
+                                            }
+
+
+                                            <td>@item.CreatedDate</td>
+                                            <td>@item.PublishedDate</td>
+
+                                            <td>
+
+                                                <div class="dropdown_1">
+                                                    <button class="dropbtn_1"><img src="~/Content/fonts/dots.png" alt="dot"></button>
+                                                    <div class="dropdown-content_1">
+                                                        <a href="admin_downloadNote.html">Download Note</a>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <footer>
+        <hr>
+
+        <div class="footer-flex">
+            <div class="text-left">
+                <p>version : 1.1.24</p>
+
+            </div>
+            <div class="  text-right footer-icon">
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>
+        dTable = $('#myTable').DataTable({
+
+            "language": {
+                "paginate": {
+                    "next": '<span>&raquo;</span>',
+                    "previous": '<span>&laquo;</span>'
+                }
+            },
+
+
+            "bLengthChange": false, // this gives option for changing the number of records shown in the UI table
+            "lengthMenu": [5], // 5 records will be shown in the table
+
+            "dom": "lrtip", //to hide default searchbox but search feature is not disabled hence customised searchbox can be made.
+            "pagingType": "simple_numbers"
+
+        });
+
+
+        $(".dataTables_info").hide();
+
+
+    </script>
+    <script src="~/Scripts/main.js"></script>
+
+
+</body>
+
+</html>

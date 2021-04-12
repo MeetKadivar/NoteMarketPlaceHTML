@@ -1,0 +1,383 @@
+﻿@model IEnumerable<NoteMarketPlace.SellerNote>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="~/Content/header.css" rel="stylesheet" />
+    <link href="~/Content/footer.css" rel="stylesheet" />
+    <link href="~/Content/admin_noteUnderReview.css" rel="stylesheet" />
+    <link href="~/Content/admin_manageAdmin.css" rel="stylesheet" />
+    <link href="~/Content/admin_publishNote.css" rel="stylesheet" />
+    <link href="~/Content/review.css" rel="stylesheet" />
+    <link href="~/Content/img.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+        a.paginate_button {
+            color: #000000 !important;
+            font-family: "Open Sans",sans-serif;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            border: none !important;
+            margin: 1px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .tr-order:hover {
+            cursor: pointer;
+        }
+
+        a.paginate_button.current {
+            color: #fff !important;
+            background: #6255a5 !important;
+            font-family: "Open Sans",sans-serif;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            border-radius: 50% !important;
+        }
+
+        a.paginate_button:hover {
+            background: none !important;
+            cursor: pointer;
+        }
+
+        a.paginate_button.current :hover {
+            background: #6255a5 !important;
+        }
+
+        #myTable_paginate, #myTable-1_paginate {
+            text-align: center !important;
+        }
+
+        .link-btn a {
+            color: white
+        }
+        #dropdownMenuButton {
+            color: black;
+            line-height: 20px;
+            font-size: 16px;
+            font-family: "Open Sans";
+            font-weight: 600;
+        }
+        .note-btn {
+            margin: 10px;
+            color: black !important;
+            line-height: 20px;
+            font-size: 16px;
+            font-family: "Open Sans";
+            font-weight: 600;
+        }
+    </style>
+
+    <title>Rejected Notes</title>
+</head>
+
+<body>
+
+    <section id="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="/Home/Index">
+                <img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        @Html.ActionLink("DashBoard", "AdminDashBoard", "Home", null, new { @class = "nav-link" })
+
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link note-btn" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                Notes
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Notes Under Review", "NoteUnderReview", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Published Notes", "AdminPublishedNote", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Downloaded Notes", "AdminDownload", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Rejected Notes", "AdminRejectedNote", "Home", null, new { @class = "dropdown-item " })
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Members", "AdminMember", "Home", null, new { @class = "nav-link " })
+
+
+                    </li>
+
+
+                    @if (ViewBag.Role == 3)
+                    {
+                        <li class="nav-item">
+
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle nav-link note-btn" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Setting
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @Html.ActionLink("Manage System Configuration", "ManageSystemConfi", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Administrator", "ManageAdmin", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Category", "ManageCategory", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Type", "ManageType", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Countries", "ManageCountry", "Home", null, new { @class = "dropdown-item " })
+
+                                </div>
+                            </div>
+
+                        </li>
+
+
+                    }
+
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <img src="~/Images/Admin/@ViewBag.ProfileUrl" alt="profile pic"
+                                     class="img-fluid rounded-circle">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Update Profile", "AdminUpdateProfile", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                            }
+                        }
+
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+    </section>
+
+    <section id="manage-admin">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-12">
+                    <h3 class="title">Rejected Notes</h3>
+
+                </div>
+
+                <div class="col-md-6 text-left">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="drop">Seller</label>
+                                <select id="drop" class="form-control">
+                                    <option>Select Seller</option>
+                                    @foreach (var item in Model.Select(a => a.User.FirstName).Distinct())
+                                    {
+                                        if (ViewBag.Seller == item)
+                                        {
+                                            <option value="@item" selected>@item</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="col-md-6 text-right">
+                    <form class="serach-button">
+                        <div class="input-group md-form form-sm form-1 pl-0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text purple lighten-3" id="basic-text1">
+
+                                    <img src="~/Content/fonts/search-icon.png" alt="serach" aria-hidden="true">
+                                </span>
+                            </div>
+                            <input class="form-control my-0 py-1 custom-input" type="text" id="myCustomSearchBox" placeholder="Search" aria-label="Search">
+                            <button class="btn custom-btn btn-sec">SEARCH</button>
+
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="admin-table">
+            <div class="container">
+                <div class="row table-row-scroll">
+                    <div class="col-md-12">
+                        <table class="table table-hover" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="tr-order">SR. NO.</th>
+                                    <th scope="col" class="tr-order">NOTE TITLE</th>
+                                    <th scope="col" class="tr-order">CATEGORY</th>
+                                    <th scope="col" class="tr-order">SELLER</th>
+                                    <th scope="col"></th>
+                                    <th scope="col" class="tr-order">DATE ADDED</th>
+                                    <th scope="col" class="tr-order">REJECTED BY</th>
+                                    <th scope="col">REMARK</th>
+                                    <th scope="col"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 1;
+                                    foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td class="pur-text">@item.Title</td>
+                                            <td>@item.NoteCategory.Name</td>
+                                            <td>@item.User.FirstName @item.User.LastName </td>
+                                            <td><a href="admin_memberDeatils.html"><img src="~/Content/fonts/eye.png" alt="eye" class="img-eye"></a></td>
+                                            <td>@item.PublishedDate</td>
+                                            <td>@item.User1.FirstName @item.User1.LastName</td>
+                                            <td>@item.AdminRemarks</td>
+                                            <td>
+                                                <div class="dropdown_1">
+                                                    <button class="dropbtn_1"><img src="~/Content/fonts/dots.png" alt="dot"></button>
+                                                    <div class="dropdown-content_1">
+                                                        <a href="@Url.Action("ApproveNote", "Home",new { id =item.ID})" onclick="return confirm('If you approve the note -System will publish the notes over portal.Please press yes to continue.')">Approve</a>
+
+                                                        @Html.ActionLink("Download", "DownloadFile", "Home", new { id = item.ID }, null)
+                                                        @Html.ActionLink("View More Details", "NoteDetails", "Home", new { id = item.ID }, null)
+
+
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <footer>
+        <hr>
+
+        <div class="footer-flex">
+            <div class="text-left">
+                <p>version : 1.1.24</p>
+
+            </div>
+            <div class="  text-right footer-icon">
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        dTable = $('#myTable').DataTable({
+
+            "language": {
+                "paginate": {
+                    "next": '<span>&raquo;</span>',
+                    "previous": '<span>&laquo;</span>'
+                }
+            },
+
+
+
+            "bLengthChange": false, // this gives option for changing the number of records shown in the UI table
+            "lengthMenu": [5], // 5 records will be shown in the table
+
+            "dom": "lrtip", //to hide default searchbox but search feature is not disabled hence customised searchbox can be made.
+            "pagingType": "simple_numbers"
+
+        });
+
+        $('#myCustomSearchBox').keyup(function () {
+            dTable.search($(this).val()).draw(); // this  is for customized searchbox with datatable search feature.
+        })
+        $(".dataTables_info").hide();
+
+        $("#drop").change(function () {
+
+            if ($("#drop option:selected").text() != "Select Seller") {
+                var seller = $("#drop option:selected").val();
+                window.location.href = "/Home/AdminRejectedNote?seller=" + seller;
+            }
+            else {
+                window.location.href = "/Home/AdminRejectedNote";
+            }
+        })
+
+
+    </script>
+
+
+</body>
+
+</html>

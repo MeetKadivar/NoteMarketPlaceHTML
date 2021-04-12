@@ -11,7 +11,7 @@ const password = document.querySelector('#inputpassword');
  var type = password.getAttribute('type');
  if( type === 'password'){
    password.setAttribute('type','text');
-     $("#togglePassword").attr("src","/Content/fonts/eye.png"); } 
+     $("#togglePassword").attr("src","/Content/fonts/eye-slash.svg"); } 
  else{
   password.setAttribute('type','password');
      $("#togglePassword").attr("src","/Content/fonts/eye.png"); 
@@ -25,7 +25,7 @@ const password = document.querySelector('#inputpassword-1');
  var type = password.getAttribute('type');
  if( type === 'password'){
    password.setAttribute('type','text');
-     $(".eye-img").attr("src","/Content/fonts/eye.png"); } 
+     $(".eye-img").attr("src","/Content/fonts/eye-slash.svg"); } 
  else{
   password.setAttribute('type','password');
     $(".eye-img").attr("src","/Content/fonts/eye.png"); 
@@ -40,7 +40,7 @@ const password = document.querySelector('#inputpassword_2');
  var type = password.getAttribute('type');
  if( type === 'password'){
    password.setAttribute('type','text');
-     $(".eye-img").attr("src","/Content/fonts/eye.png"); } 
+     $(".eye-img").attr("src","/Content/fonts/eye-slash.svg"); } 
  else{
   password.setAttribute('type','password');
      $(".eye-img").attr("src","/Content/fonts/eye.png"); 

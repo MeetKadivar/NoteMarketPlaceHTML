@@ -1,0 +1,430 @@
+﻿@model IEnumerable<NoteMarketPlace.User>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="~/Content/header.css" rel="stylesheet" />
+    <link href="~/Content/footer_fixed.css" rel="stylesheet" />
+    <link href="~/Content/review.css" rel="stylesheet" />
+    <link href="~/Content/admin_manageAdmin.css" rel="stylesheet" />
+    <link href="~/Content/admin_member.css" rel="stylesheet" />
+
+    <style>
+        a.paginate_button {
+            color: #000000 !important;
+            font-family: "Open Sans",sans-serif;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            border: none !important;
+            margin: 1px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .tr-order:hover {
+            cursor: pointer;
+        }
+
+        a.paginate_button.current {
+            color: #fff !important;
+            background: #6255a5 !important;
+            font-family: "Open Sans",sans-serif;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            border-radius: 50% !important;
+        }
+
+        a.paginate_button:hover {
+            background: none !important;
+            cursor: pointer;
+        }
+
+        a.paginate_button.current :hover {
+            background: #6255a5 !important;
+        }
+
+        #myTable_paginate, #myTable-1_paginate {
+            text-align: center !important;
+        }
+
+        .link-btn a {
+            color: white
+        }
+    </style>
+    <title>Members</title>
+</head>
+
+<body>
+    <section id="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="/Home/Index">
+                <img src="~/Content/imges/logo.png" alt="logo" class="img-fluid" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        @Html.ActionLink("DashBoard", "AdminDashBoard", "Home", null, new { @class = "nav-link " })
+
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                Notes
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Notes Under Review", "NoteUnderReview", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Published Notes", "AdminPublishedNote", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Downloaded Notes", "AdminDownload", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Rejected Notes", "AdminRejectedNote", "Home", null, new { @class = "dropdown-item " })
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Members", "AdminMember", "Home", null, new { @class = "nav-link active-link" })
+
+
+                    </li>
+
+
+                    @if (ViewBag.Role == 3)
+                    {
+                        <li class="nav-item">
+
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle nav-link " type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Setting
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @Html.ActionLink("Manage System Configuration", "ManageSystemConfi", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Administrator", "ManageAdmin", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Category", "ManageCategory", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Type", "ManageType", "Home", null, new { @class = "dropdown-item " })
+                                    @Html.ActionLink("Manage Countries", "ManageCountry", "Home", null, new { @class = "dropdown-item " })
+
+                                </div>
+                            </div>
+
+                        </li>
+
+
+                    }
+
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle nav-link nav-link-img" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <img src="~/Images/Admin/@ViewBag.ProfileUrl" alt="profile pic"
+                                     class="img-fluid rounded-circle">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @Html.ActionLink("Update Profile", "AdminUpdateProfile", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item dropdown-logout">Logout</a>
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link nav-login text-center">Logout</a>
+                            }
+                        }
+
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+    </section>
+
+    <section id="manage-admin">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6 text-left">
+                    <h3 class="title">Members</h3>
+
+                </div>
+                <div class="col-md-6 text-right">
+                    <form>
+                        <div class="input-group md-form form-sm form-1 pl-0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text purple lighten-3" id="basic-text1">
+
+                                    <img src="~/Content/fonts/search-icon.png" alt="serach" aria-hidden="true">
+                                </span>
+                            </div>
+                            <input class="form-control my-0 py-1 custom-input" type="text" id="myCustomSearchBox" placeholder="Search" aria-label="Search">
+                            <button class="btn custom-btn btn-sec">SEARCH</button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="admin-table">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="tr-order">SR. NO.</th>
+                                    <th scope="col" class="tr-order">FIRST NAME</th>
+                                    <th scope="col" class="tr-order">LAST NAME</th>
+                                    <th scope="col" class="text-center tr-order">EMAIL</th>
+                                    <th scope="col" class="tr-order ">JOINING DATE</th>
+
+
+                                    <th scope="col" class="text-center tr-order">UNDER REVIEW<BR>NOTES</th>
+                                    <th scope="col" class="text-center tr-order">PUBLISHED<BR>NOTES</th>
+                                    <th scope="col" class="text-center tr-order">DOWNLOADED<BR>NOTES</th>
+                                    <th scope="col" class="text-center tr-order">TOTAL<BR>EXPANSES</th>
+                                    <th scope="col" class="text-center tr-order">TOTAL<BR>EARNING</th>
+                                    <th scope="col"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int i = 1;
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td>@item.FirstName</td>
+                                            <td>@item.LastName</td>
+                                            <td>@item.Email</td>
+
+
+                                            <td>@item.CreatedDate</td>
+                                            @{ int ii = 0;
+                                                foreach (var itemlist in ViewBag.NoteUnderReview)
+                                                {
+                                                    if (itemlist.ID == item.ID)
+                                                    {
+                                                        if (itemlist.Count != 0)
+                                                        {
+                                                            <td data-value="@(ii++)" class="text-center">@itemlist.Count</td>
+
+                                                        }
+
+                                                    }
+
+                                                }
+                                                if (ii == 0)
+                                                {
+                                                    <td class="text-center">0</td>
+                                                }
+                                            }
+
+                                            @{ int j = 0;
+                                                foreach (var itemlist in ViewBag.List)
+                                                {
+                                                    if (itemlist.ID == item.ID)
+                                                    {
+                                                        if (itemlist.Count != 0)
+                                                        {
+                                                            <td data-value="@(j++)" class="text-center">@itemlist.Count</td>
+
+                                                        }
+
+                                                    }
+
+                                                }
+                                                if (j == 0)
+                                                {
+                                                    <td class="text-center">0</td>
+                                                }
+                                            }
+
+                                            @{ int k = 0;
+                                                foreach (var itemlistdown in ViewBag.ListOfDownload)
+                                                {
+                                                    if (itemlistdown.Note == item.ID)
+                                                    {
+                                                        if (itemlistdown.Count != 0)
+                                                        {
+                                                            <td data-value="@(k++)" class="text-center">@itemlistdown.Count</td>
+
+                                                        }
+
+                                                    }
+
+
+
+                                                }
+                                                if (k == 0)
+                                                {
+                                                    <td class="text-center">0</td>
+                                                }
+                                            }
+
+                                            @{ int v = 0;
+                                                foreach (var expanse in ViewBag.TotalExpanse)
+                                                {
+                                                    if (expanse.id == item.ID)
+                                                    {
+                                                        if (expanse.Money != 0)
+                                                        {
+                                                            <td data-value="@(v++)" class="text-center">$@expanse.Money</td>
+
+                                                        }
+
+                                                    }
+
+
+
+                                                }
+                                                if (v == 0)
+                                                {
+                                                    <td class="text-center">$0</td>
+                                                }
+                                            }
+
+
+
+                                            @{ int l = 0;
+                                                foreach (var earning in ViewBag.TotalEarnings)
+                                                {
+                                                    if (earning.id == item.ID)
+                                                    {
+                                                        if (earning.Money != 0)
+                                                        {
+                                                            <td data-value="@(l++)" class="text-center">$@earning.Money</td>
+
+                                                        }
+
+                                                    }
+
+
+
+                                                }
+                                                if (l == 0)
+                                                {
+                                                    <td class="text-center">$0</td>
+                                                }
+                                            }
+
+
+
+                                            <td>
+                                                <div class="dropdown_1">
+                                                    <button class="dropbtn_1"><img src="~/Content/fonts/dots.png" alt="dot"></button>
+                                                    <div class="dropdown-content_1">
+                                                        @Html.ActionLink("View More Details", "AdminMemberDetails", "Home", new { id = item.ID }, null)
+
+                                                        @Html.ActionLink("Deactivate", "AdminMemberDeactive", "Home", new { id = item.ID }, new { onclick = "return confirm('Are you sure you want to make this member inactive?')" })
+
+
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <footer>
+        <hr>
+
+        <div class="footer-flex">
+            <div class="text-left">
+                <p>version : 1.1.24</p>
+
+            </div>
+            <div class="  text-right footer-icon">
+                <p> copyright <span>&#169</span> TatvaSoft All right reserved</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/90013f5e15.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>
+        dTable = $('#myTable').DataTable({
+
+            "language": {
+                "paginate": {
+                    "next": '<span>&raquo;</span>',
+                    "previous": '<span>&laquo;</span>'
+                }
+            },
+
+            "bLengthChange": false, // this gives option for changing the number of records shown in the UI table
+            "lengthMenu": [5], // 5 records will be shown in the table
+
+            "dom": "lrtip", //to hide default searchbox but search feature is not disabled hence customised searchbox can be made.
+            "pagingType": "simple_numbers"
+
+        });
+
+        $('#myCustomSearchBox').keyup(function () {
+            dTable.search($(this).val()).draw(); // this  is for customized searchbox with datatable search feature.
+        })
+        $(".dataTables_info").hide();
+
+
+
+    </script>
+    <script src="~/Scripts/main.js"></script>
+</body>
+
+</html>

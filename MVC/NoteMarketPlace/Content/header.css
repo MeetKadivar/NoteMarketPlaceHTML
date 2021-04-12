@@ -73,7 +73,7 @@ nav{
 
 }
 .dropdown-toggle::after { 
-    content: none; 
+    content: none !important; 
 } 
 
 button:focus{ 
@@ -104,4 +104,9 @@ nav .navbar-nav{
         content: "" !important;
     
     } 
+}
+
+.dropdown-item:hover{
+    color:white !important;
+    background-color:#6255a5 !important;
 }

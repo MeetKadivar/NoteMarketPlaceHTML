@@ -84,3 +84,8 @@
 .modal-header{
     border: none !important;
 }
+.review-btn {
+    background: none !important;
+    color: black !important;
+    font-size: 12px !important;
+}

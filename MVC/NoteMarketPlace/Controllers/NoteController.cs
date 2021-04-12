@@ -15,16 +15,11 @@ namespace NoteMarketPlace.Controllers
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult NoteListing(string search, string Type, string Country, string Category, string Uni, string Course, string Rating,int PageNumber = 1 )
         {
-            if((search == null || search == "") && (Type == null && Country == null && Course==null && Category == null && Uni == null && Rating == null))
+            if((search == null || search == "") && (Type == null  && Country == null  && Course==null  && Category == null  && Uni == null  && Rating == null))
             {
-                //var countrylist = db.Countries.ToList();
-                //ViewBag.CountryList = new SelectList(countrylist, "ID", "Name");
+               
 
-                //var typelist = db.NoteTypes.ToList();
-                //ViewBag.TypeList = new SelectList(typelist,"")
-
-
-                var res= db.SellerNotes.ToList();
+                var res= db.SellerNotes.Where(a=>a.Status == 9).ToList();
                 ViewBag.TotalPages = Math.Ceiling(res.Count() / 6.0);
                 ViewBag.TotalNote = res.Count();
                 ViewBag.PageNumber = PageNumber;
@@ -34,18 +29,68 @@ namespace NoteMarketPlace.Controllers
             }
             else
             {
-                ViewBag.Message = search;
-               
-                    var res = db.SellerNotes.Where(x => x.Title.Contains(search) || x.NoteType1.Name == Type || x.Country1.Name == Country || x.NoteCategory.Name == Category || x.UniversityName == Uni || x.Course == Course).Distinct().ToList();
+                if( search == "" && Type == "null" &&  Country == "null" &&  Course == "null" && Category == "null"&& Uni == "Select University" &&  Rating == "null")
+                {
+                    var res = db.SellerNotes.Where(a => a.Status == 9).ToList();
+                    ViewBag.TotalPages = Math.Ceiling(res.Count() / 6.0);
+                    ViewBag.TotalNote = res.Count();
+                    ViewBag.PageNumber = PageNumber;
+                    res = res.Skip((PageNumber - 1) * 6).Take(6).ToList();
+                    return View(res);
+                }
+                else
+                {
+                    if (search == null || search == "")
+                    {
+                        ViewBag.Message = search;
 
-                ViewBag.TotalPages = Math.Ceiling(res.Count() / 6.0);
-                ViewBag.PageNumber = PageNumber;
-                ViewBag.TotalNote = res.Count();
-                res = res.Skip((PageNumber - 1) * 6).Take(6).ToList();
-                
-                return View(res);
+                        var res = db.SellerNotes.Where(x => (x.NoteType1.Name == Type || x.Country1.Name == Country || x.NoteCategory.Name == Category || x.UniversityName == Uni || x.Course == Course) && (x.Status == 9)).Distinct().ToList();
 
-             
+                        ViewBag.TotalPages = Math.Ceiling(res.Count() / 6.0);
+                        ViewBag.PageNumber = PageNumber;
+                        ViewBag.TotalNote = res.Count();
+                        res = res.Skip((PageNumber - 1) * 6).Take(6).ToList();
+
+                        return View(res);
+
+                    }
+                    else
+                    {
+
+                        if (Type == "null" && Country == "null" && Course == "null" && Category == "null" && Uni == "Select University" && Rating == "null")
+                        {
+                            ViewBag.Message = search;
+                            var searchresult = db.SellerNotes.Where(a => a.Title.Contains(search)).ToList();
+
+
+
+                            ViewBag.TotalPages = Math.Ceiling(searchresult.Count() / 6.0);
+                            ViewBag.PageNumber = PageNumber;
+                            ViewBag.TotalNote = searchresult.Count();
+                            var searchresult1 = searchresult.Skip((PageNumber - 1) * 6).Take(6).ToList();
+
+                            return View(searchresult1);
+                        }
+                        else
+                        {
+                            ViewBag.Message = search;
+                            var res1 = db.SellerNotes.Where(a => a.Title.Contains(search)).ToList();
+
+                            var res = res1.Where(x => (x.NoteType1.Name == Type || x.Country1.Name == Country || x.NoteCategory.Name == Category || x.UniversityName == Uni || x.Course == Course) && (x.Status == 9)).Distinct().ToList();
+
+                            ViewBag.TotalPages = Math.Ceiling(res.Count() / 6.0);
+                            ViewBag.PageNumber = PageNumber;
+                            ViewBag.TotalNote = res.Count();
+                            var res2 = res.Skip((PageNumber - 1) * 6).Take(6).ToList();
+
+                            return View(res2);
+                        }
+
+                    }
+
+                }
+
+
 
 
             }

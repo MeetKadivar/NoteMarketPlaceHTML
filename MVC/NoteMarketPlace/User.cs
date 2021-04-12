@@ -70,5 +70,7 @@ namespace NoteMarketPlace
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
         public virtual UserRole UserRole { get; set; }
+        public string phonenumber { get; set; }
+        public string CountryCode { get; set; }
     }
 }

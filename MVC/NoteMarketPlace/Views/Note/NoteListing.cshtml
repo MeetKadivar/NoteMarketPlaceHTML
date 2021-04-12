@@ -13,7 +13,7 @@
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    <link href="~/Content/header.css" rel="stylesheet" />
     <link href="~/Content/user_profile.css" rel="stylesheet" />
     <link href="~/Content/search.css" rel="stylesheet">
     <link href="~/Content/footer_logo.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 
         }
     </style>
-
+        
     <title >Serach Notes</title>
 </head>
 
@@ -74,12 +74,13 @@
                                              class="img-fluid rounded-circle">
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">My Profile</a>
-                                        <a class="dropdown-item" href="#">My Downloads</a>
-                                        <a class="dropdown-item" href="#">My Sold Notes</a>
-                                        <a class="dropdown-item" href="#">My Rejected Notes</a>
+                                        @Html.ActionLink("My Profile", "UserProfile", "Home", null, new { @class = "dropdown-item" })
+                                        @Html.ActionLink("My Download", "Download", "Home", null, new { @class = "dropdown-item" })
+                                        @Html.ActionLink("My Sold Note", "SoldNote", "Home", null, new { @class = "dropdown-item" })
+                                        @Html.ActionLink("My Rejected Note", "RejectedNote", "Home", null, new { @class = "dropdown-item" })
 
-                                        <a class="dropdown-item" href="#">Change Password</a>
+                                        @Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { @class = "dropdown-item" })
+
                                         @if (Request.IsAuthenticated)
                                         {
                                             using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -146,7 +147,16 @@
 
                         <div class="form-group has-search">
                             <span class="fa fa-search form-control-feedback"></span>
-                            <input type="text" class="form-control" id="search_box" placeholder="Search notes here...">
+                            @if (ViewBag.Message != null)
+                            {
+                                <input type="text" class="form-control" id="search_box" placeholder="@ViewBag.Message" >
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" id="search_box" placeholder="Search notes here..." >
+                            }
+
+
                         </div>
 
 
@@ -437,66 +447,66 @@
        
                 var uni = $("#uni option:selected").text();
                 window.location.href = "/Note/NoteListing?search=" + inputVal + "&Type=" + type + "&Country=" + country + "&Category=" + category + "&Uni=" + uni + "&Course=" + course + "&Rating=" + rating;
-                alert("You've entered: " + inputVal);
+                //alert("You've entered: " + inputVal);
                 e.preventDefault();
             }
         });
 
-        $(".drop1").change(function () {
+        //$(".drop1").change(function () {
 
 
-            var inputVal = $("#search_box").val();
-            if ($("#NoteType option:selected").text() != "Select Type") {
-                var type = $("#NoteType option:selected").text();
-            }
-            else {
-                var type = null;
-            }
+        //    var inputVal = $("#search_box").val();
+        //    if ($("#NoteType option:selected").text() != "Select Type") {
+        //        var type = $("#NoteType option:selected").text();
+        //    }
+        //    else {
+        //        var type = null;
+        //    }
 
-            if ($("#category option:selected").text() != "Select Category") {
-                var category = $("#category option:selected").text();
-            }
-            else {
-                var category = null;
-            }
+        //    if ($("#category option:selected").text() != "Select Category") {
+        //        var category = $("#category option:selected").text();
+        //    }
+        //    else {
+        //        var category = null;
+        //    }
 
-            if ($("#course option:selected").text() != "Select Course") {
-                var course = $("#course option:selected").text();
-            }
-            else {
-                var course = null;
-            }
+        //    if ($("#course option:selected").text() != "Select Course") {
+        //        var course = $("#course option:selected").text();
+        //    }
+        //    else {
+        //        var course = null;
+        //    }
 
-            if ($("#country option:selected").text() != "Select Country") {
-                var country = $("#country option:selected").text();
-            }
-            else {
-                var country = null;
-            }
+        //    if ($("#country option:selected").text() != "Select Country") {
+        //        var country = $("#country option:selected").text();
+        //    }
+        //    else {
+        //        var country = null;
+        //    }
 
-            if ($("#rating option:selected").text() != "select rating") {
-                var rating = $("#rating option:selected").text();
-            }
-            else {
-                var rating = null;
-            }
+        //    if ($("#rating option:selected").text() != "select rating") {
+        //        var rating = $("#rating option:selected").text();
+        //    }
+        //    else {
+        //        var rating = null;
+        //    }
 
-            if ($("#uni option:selected").text() != "Select University") {
-                var uni = $("#uni option:selected").text();
-            }
-            else {
-                var uni = null;
-            }
-
-
+        //    if ($("#uni option:selected").text() != "Select University") {
+        //        var uni = $("#uni option:selected").text();
+        //    }
+        //    else {
+        //        var uni = null;
+        //    }
 
 
-            var uni = $("#uni option:selected").text();
-            window.location.href = "/Note/NoteListing?search=" + inputVal + "&Type=" + type + "&Country=" + country + "&Category=" + category + "&Uni=" + uni + "&Course=" + course + "&Rating=" + rating;
-            e.preventDefault();
-            alert("You've entered: " + inputVal);
 
-        });
+
+        //    var uni = $("#uni option:selected").text();
+        //    window.location.href = "/Note/NoteListing?search=" + inputVal + "&Type=" + type + "&Country=" + country + "&Category=" + category + "&Uni=" + uni + "&Course=" + course + "&Rating=" + rating;
+        //    e.preventDefault();
+        //    alert("You've entered: " + inputVal);
+
+        //});
 
 
     </script>
@@ -515,14 +525,3 @@
 
 
 
-
-@*@foreach(var item in Model)
-    {
-        <div style="margin-bottom:20px">
-            <img  class="img-responsive" src="~/Images/Notes/@item.DisplayPicture" height="350" width="240"/>
-        </div>
-        <div style="border-top:1px solid #000000">
-            <p><a href="#">@item.Title</a></p>
-
-        </div>
-    }*@
