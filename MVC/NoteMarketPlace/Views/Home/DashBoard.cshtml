@@ -58,6 +58,9 @@
         .link-btn a{
             color:white
         }
+        .box-par{
+            color:black;
+        }
 
 
     </style>
@@ -177,14 +180,14 @@
                             <div class="col-md-4 text-center">
                                 <div class="box-content">
                                     <span>@ViewBag.TotalDownload</span>
-                                    <p>Number Of Note Sold</p>
+                                    <a href="@Url.Action("SoldNote","Home")" class="box-par"><p>Number Of Note Sold</p></a>
                                 </div>
 
                             </div>
                             <div class="col-md-4 text-center">
                                 <div class="box-content">
                                     <span>$@ViewBag.TotalMoney</span>
-                                    <p>Money Earned</p>
+                                    <a href="@Url.Action("SoldNote","Home")" class="box-par"> <p>Money Earned</p></a>
                                 </div>
 
                             </div>
@@ -198,15 +201,15 @@
                     <div class="row">
                         <div class="col-md-4 right-inner-box text-center">
                             <span>@ViewBag.TotalUserDownload</span>
-                            <p>My Download</p>
+                            <a href="@Url.Action("Download","Home")" class="box-par"><p>My Download</p></a>
                         </div>
                         <div class="col-md-4 right-inner-box text-center">
                             <span>@ViewBag.TotalRejected</span>
-                            <p>My rejected Notes</p>
+                            <a href="@Url.Action("RejectedNote","Home")" class="box-par"><p>My rejected Notes</p></a>
                         </div>
                         <div class="col-md-4 right-inner-box text-center">
                             <span>@ViewBag.TotalBuyerRequest</span>
-                            <p>Buyer Request</p>
+                            <a href="@Url.Action("BuyerRequest","Home")" class="box-par"><p>Buyer Request</p></a>
 
                         </div>
 
@@ -273,7 +276,7 @@
                                 @{
                                     foreach (var item in Model)
                                     {
-                                        if (item.ReferenceData.Value != "Published")
+                                        if (item.ReferenceData.Value != "Published" && item.ReferenceData.Value != "Removed" && item.ReferenceData.Value != "Rejected")
                                         {
                                             <tr>
                                                 <td>@Html.DisplayFor(model => item.PublishedDate)</td>

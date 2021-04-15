@@ -22,6 +22,11 @@
     <link href="~/Content/review.css" rel="stylesheet">
     <link href="~/Content/img.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .tabl-head{
+            color:black;
+        }
+    </style>
 
     <title>BuyerRequest</title>
 </head>
@@ -149,28 +154,28 @@
                                 <th scope="col">SR. NO.</th>
                                 <th scope="col">
 
-                                    @Html.ActionLink("NOTETITLE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "NoteTitle", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                    @Html.ActionLink("NOTETITLE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "NoteTitle", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class="tabl-head" })
                                 </th>
                                 <th scope="col">
-                                    @Html.ActionLink("CATAGORY", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                    @Html.ActionLink("CATAGORY", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "tabl-head" })
 
 
 
                                 </th>
 
                                 <th scope="col">
-                                    @Html.ActionLink("BUYER", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Buyer", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                    @Html.ActionLink("BUYER", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Buyer", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "tabl-head" })
 
                                 </th>
 
                                 <th scope="col">SELLTYPE</th>
                                 <th scope="col">
-                                    @Html.ActionLink("PRICE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                    @Html.ActionLink("PRICE", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "tabl-head" })
 
 
                                 </th>
                                 <th scope="col">
-                                    @Html.ActionLink("DOWNLOADED\n DATE/TIME", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "DownDate", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "note-title" })
+                                    @Html.ActionLink("DOWNLOADED\n DATE/TIME", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "DownDate", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber }, new { @class = "tabl-head" })
 
 
                                 </th>
@@ -200,7 +205,7 @@
 
 
                                             </td>
-                                            <td>
+                                            <td >
                                                 @Html.DisplayFor(modelItem => item.NoteTitle)
 
 

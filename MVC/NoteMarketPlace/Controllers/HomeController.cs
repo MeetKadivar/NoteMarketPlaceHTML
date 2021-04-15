@@ -314,14 +314,6 @@ namespace NoteMarketPlace.Controllers
                 filename_preview = null;
             }
             
-
-            
-
-
-
-
-
-
             string userId = User.Identity.Name;
             var v = dc.Users.Where(a => a.Email == userId).FirstOrDefault();
             var profile = dc.UserProfiles.Where(a => a.UserID == v.ID).FirstOrDefault();
@@ -840,18 +832,6 @@ namespace NoteMarketPlace.Controllers
                 filename_preview = null;
             }
 
-
-
-
-
-            var sellerid = dc.SellerNotes.Where(a => a.ID == model.SellerNote.ID).FirstOrDefault();
-            dc.SellerNotes.Remove(sellerid);
-            var note = dc.SellerNotesAttachements.Where(a => a.NoteID == model.SellerNote.ID).FirstOrDefault();
-            dc.SellerNotesAttachements.Remove(note);
-
-
-
-
             string userId = User.Identity.Name;
             var v = dc.Users.Where(a => a.Email == userId).FirstOrDefault();
             var sellerID = v.ID;
@@ -868,39 +848,32 @@ namespace NoteMarketPlace.Controllers
             }
 
 
+            var sellerid = dc.SellerNotes.Where(a => a.ID == model.SellerNote.ID).FirstOrDefault();
 
 
-            SellerNote sellernote = new SellerNote()
-            {
-                SellerID = sellerID,
-                Status = 7,
-                PublishedDate = DateTime.Now,
-                Title = model.SellerNote.Title,
-                Category = model.SellerNote.Category,
-                NoteType = model.SellerNote.NoteType,
-                NumberofPages = model.SellerNote.NumberofPages,
-                Description = model.SellerNote.Description,
-                UniversityName = model.SellerNote.UniversityName,
-                Country = model.SellerNote.Country,
-                Course = model.SellerNote.Course,
-                CourseCode = model.SellerNote.CourseCode,
-                Professor = model.SellerNote.Professor,
-                IsPaid = paid,
-                SellingPrice = price,
-                IsActive = true,
-                DisplayPicture = filename,
-                NotesPreview = filename_preview,
-                CreatedDate =DateTime.Now,
-                CreatedBy = sellerID
-
-            };
+            sellerid.SellerID = sellerID;
+            sellerid.Status = 7;
+            sellerid.PublishedDate = DateTime.Now;
+            sellerid.Title = model.SellerNote.Title;
+            sellerid.Category = model.SellerNote.Category;
+            sellerid.NoteType = model.SellerNote.NoteType;
+            sellerid.NumberofPages = model.SellerNote.NumberofPages;
+            sellerid.Description = model.SellerNote.Description;
+            sellerid.UniversityName = model.SellerNote.UniversityName;
+            sellerid.Country = model.SellerNote.Country;
+            sellerid.Course = model.SellerNote.Course;
+            sellerid.CourseCode = model.SellerNote.CourseCode;
+            sellerid.Professor = model.SellerNote.Professor;
+            sellerid.IsPaid = paid;
+            sellerid.SellingPrice = price;
+            sellerid.IsActive = true;
+            sellerid.DisplayPicture = filename;
+            sellerid.NotesPreview = filename_preview;
+            sellerid.ModifiedDate = DateTime.Now;
+            sellerid.ModifiedBy = sellerID;
 
 
-
-            dc.SellerNotes.Add(sellernote);
-            dc.SaveChanges();
-
-            var noteid = dc.SellerNotes.Where(a => a.DisplayPicture == filename).FirstOrDefault();
+            
 
 
             string filename_pdf = Path.GetFileNameWithoutExtension(model.SellerNotesAttachement.NoteFile.FileName);
@@ -912,17 +885,16 @@ namespace NoteMarketPlace.Controllers
 
 
 
+            var note = dc.SellerNotesAttachements.Where(a => a.NoteID == model.SellerNote.ID).FirstOrDefault();
 
-            SellerNotesAttachement sellernoteattachement = new SellerNotesAttachement()
-            {
-                NoteID = noteid.ID,
-                FileName = filename_pdf,
-                FilePath = full_filename_pdf,
-                IsActive = true,
-                CreatedDate = DateTime.Now,
-                CreatedBy = sellerID
-            };
-            dc.SellerNotesAttachements.Add(sellernoteattachement);
+            note.FileName = filename_pdf;
+            note.FilePath = full_filename_pdf;
+            note.IsActive = true;
+            note.ModifiedDate = DateTime.Now;
+            note.ModifiedBy = sellerID;
+
+
+        
             dc.SaveChanges();
 
 
@@ -937,7 +909,7 @@ namespace NoteMarketPlace.Controllers
             var countrylist = dc.Countries.ToList();
             ViewBag.CountryList = new SelectList(countrylist, "ID", "Name");
 
-            return View();
+            return RedirectToAction("DashBoard", "Home");
         }
         [Authorize]
         public ActionResult AllowDownload (int id,int downloader)
